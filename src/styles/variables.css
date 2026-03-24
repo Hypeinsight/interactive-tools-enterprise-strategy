@@ -1,0 +1,51 @@
+:root {
+  --blue: #0077FF;
+  --blue2: #1482FF;
+  --blue3: #0074FD;
+  --lime: #BFE000;
+  --dark: #00182E;
+  --navy: #12203E;
+  --white: #FFFFFF;
+  --off: #F9FAF6;
+  --light: #EEF4FF;
+  --grey: #6B7A99;
+  --lgrey: #E2E8F0;
+  --text: #1a2744;
+  --card-shadow: 0 2px 24px rgba(0, 119, 255, 0.07);
+  --f: 'Inter', sans-serif;
+
+  /* Blueprint — dark (default) */
+  --bp-bg: #1a1f2e;
+  --bp-grid: rgba(0, 119, 255, 0.06);
+  --bp-line: rgba(0, 119, 255, 0.18);
+  --bp-text: rgba(0, 119, 255, 0.35);
+
+  /* UI chrome */
+  --chrome-bg: rgba(26, 31, 46, 0.85);
+  --chrome-border: rgba(255, 255, 255, 0.1);
+  --chrome-text: rgba(255, 255, 255, 0.7);
+  --chrome-text-dim: rgba(255, 255, 255, 0.4);
+  --chrome-hover: rgba(255, 255, 255, 0.08);
+  --header-grad-from: rgba(26, 31, 46, 0.95);
+  --header-grad-to: rgba(26, 31, 46, 0);
+}
+
+[data-theme="light"] {
+  --bp-bg: #F0F4FA;
+  --bp-grid: rgba(0, 119, 255, 0.08);
+  --bp-line: rgba(0, 119, 255, 0.3);
+  --bp-text: rgba(0, 119, 255, 0.45);
+  --chrome-bg: rgba(255, 255, 255, 0.92);
+  --chrome-border: rgba(0, 0, 0, 0.1);
+  --chrome-text: #1a2744;
+  --chrome-text-dim: #6B7A99;
+  --chrome-hover: rgba(0, 0, 0, 0.05);
+  --header-grad-from: rgba(240, 244, 250, 0.97);
+  --header-grad-to: rgba(240, 244, 250, 0);
+  --flow-opacity-boost: 2.5;
+
+  /* Phase colours */
+  --phase-awareness: #0077FF;
+  --phase-engage: #BFE000;
+  --phase-convert: #00C2A8;
+}
