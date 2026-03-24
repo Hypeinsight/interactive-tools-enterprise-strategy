@@ -145,7 +145,7 @@ export default function App() {
       {/* Zoomable/Pannable Canvas */}
       <TransformWrapper
         ref={transformRef}
-        initialScale={1}
+        initialScale={1.4}
         minScale={0.5}
         maxScale={4}
         centerOnInit={true}
