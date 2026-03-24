@@ -138,17 +138,18 @@ export default function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <button className="theme-toggle" onClick={exportEdits} title="Export edits">⬇</button>
-        <button className="theme-toggle" onClick={importEdits} title="Import edits">⬆</button>
+        <button className="theme-toggle" onClick={exportEdits} title="Export edits as JSON file" style={{ fontSize: '0.6rem', fontWeight: 700 }}>EXP</button>
+        <button className="theme-toggle" onClick={importEdits} title="Import edits from JSON file" style={{ fontSize: '0.6rem', fontWeight: 700 }}>IMP</button>
       </div>
 
       {/* Zoomable/Pannable Canvas */}
       <TransformWrapper
         ref={transformRef}
         initialScale={1.4}
+        initialPositionX={-200}
+        initialPositionY={-900}
         minScale={0.5}
         maxScale={4}
-        centerOnInit={true}
         wheel={{ step: 0.08 }}
         panning={{ velocityDisabled: true }}
         doubleClick={{ disabled: true }}
