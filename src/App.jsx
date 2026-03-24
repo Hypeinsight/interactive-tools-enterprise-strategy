@@ -5,26 +5,38 @@ import DetailPanel from './components/DetailPanel'
 import FilterBar from './components/FilterBar'
 import ZoomControls from './components/ZoomControls'
 import baseTactics from './data/tactics.json'
+import { loadRemoteEdits, saveRemoteEdits } from './utils/remoteStorage'
 
 const STORAGE_KEY = 'tools-strategy-map-edits'
 
-function loadTactics() {
+function applyEdits(edits) {
+  return baseTactics.map(t => ({ ...t, ...(edits[t.id] || {}) }))
+}
+
+function loadLocalTactics() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) {
-      const edits = JSON.parse(saved)
-      return baseTactics.map(t => ({ ...t, ...(edits[t.id] || {}) }))
-    }
+    if (saved) return applyEdits(JSON.parse(saved))
   } catch (e) { /* ignore */ }
   return baseTactics
 }
 
 export default function App() {
-  const [tacticsData, setTacticsData] = useState(loadTactics)
+  const [tacticsData, setTacticsData] = useState(loadLocalTactics)
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedTactic, setSelectedTactic] = useState(null)
   const [theme, setTheme] = useState('dark')
   const transformRef = useRef(null)
+
+  // Load remote edits on mount (overrides local)
+  useEffect(() => {
+    loadRemoteEdits().then(edits => {
+      if (edits && Object.keys(edits).length > 0) {
+        setTacticsData(applyEdits(edits))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(edits))
+      }
+    })
+  }, [])
 
   const toggleTheme = useCallback(() => {
     setTheme(t => t === 'dark' ? 'light' : 'dark')
@@ -42,7 +54,7 @@ export default function App() {
   const handleUpdateTactic = useCallback((updatedTactic) => {
     setTacticsData(prev => {
       const next = prev.map(t => t.id === updatedTactic.id ? updatedTactic : t)
-      // Save only the edited fields to localStorage
+      // Build diff of edited fields
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
         const base = baseTactics.find(b => b.id === updatedTactic.id)
@@ -58,6 +70,8 @@ export default function App() {
           delete saved[updatedTactic.id]
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(saved))
+        // Save to remote (async, non-blocking)
+        saveRemoteEdits(saved)
       } catch (e) { /* ignore */ }
       return next
     })
@@ -99,8 +113,9 @@ export default function App() {
         try {
           const edits = JSON.parse(ev.target.result)
           localStorage.setItem(STORAGE_KEY, JSON.stringify(edits))
-          setTacticsData(baseTactics.map(t => ({ ...t, ...(edits[t.id] || {}) })))
+          setTacticsData(applyEdits(edits))
           setSelectedTactic(null)
+          saveRemoteEdits(edits)
         } catch (err) { alert('Invalid file') }
       }
       reader.readAsText(file)
