@@ -87,7 +87,7 @@ export default function App() {
   }, [])
 
   const handleReset = useCallback(() => {
-    transformRef.current?.resetTransform()
+    transformRef.current?.centerView(1.4)
   }, [])
 
   const exportEdits = useCallback(() => {
