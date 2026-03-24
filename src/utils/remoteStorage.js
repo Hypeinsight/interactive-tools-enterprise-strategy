@@ -1,31 +1,17 @@
 /*
  * Remote JSON storage via npoint.io (free, CORS-friendly, no auth).
  * All users share the same document — edits are globally visible.
- *
- * On first deploy, the app auto-creates a document and stores its ID
- * in localStorage. To persist across deploys, set VITE_NPOINT_ID in
- * your Render environment variables.
+ * Document pre-created at: https://api.npoint.io/09bf1732895677653e13
  */
 
-const API = 'https://api.npoint.io'
-const LOCAL_KEY = 'tools-strategy-npoint-id'
-
-function getDocId() {
-  return import.meta.env.VITE_NPOINT_ID || localStorage.getItem(LOCAL_KEY)
-}
-
-function setDocId(id) {
-  localStorage.setItem(LOCAL_KEY, id)
-}
+const DOC_URL = 'https://api.npoint.io/09bf1732895677653e13'
 
 export async function loadRemoteEdits() {
-  const docId = getDocId()
-  if (!docId) return {}
-
   try {
-    const res = await fetch(`${API}/${docId}`)
+    const res = await fetch(DOC_URL)
     if (res.ok) {
-      return await res.json()
+      const data = await res.json()
+      if (data && typeof data === 'object') return data
     }
   } catch (e) {
     console.warn('Failed to load remote edits:', e)
@@ -34,32 +20,12 @@ export async function loadRemoteEdits() {
 }
 
 export async function saveRemoteEdits(edits) {
-  const docId = getDocId()
-
   try {
-    if (docId) {
-      // Update existing document
-      await fetch(`${API}/${docId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(edits),
-      })
-    } else {
-      // Create new document
-      const res = await fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: JSON.stringify(edits) }),
-      })
-      if (res.ok) {
-        const data = await res.json()
-        if (data && data.id) {
-          setDocId(data.id)
-          console.log('Created remote store:', data.id)
-          console.log('Set VITE_NPOINT_ID=' + data.id + ' in Render env vars to persist across deploys')
-        }
-      }
-    }
+    await fetch(DOC_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(edits),
+    })
   } catch (e) {
     console.warn('Failed to save remote edits:', e)
   }
