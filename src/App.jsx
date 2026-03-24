@@ -144,8 +144,7 @@ export default function App() {
       <TransformWrapper
         ref={transformRef}
         initialScale={1.4}
-        initialPositionX={-200}
-        initialPositionY={-900}
+        centerOnInit={true}
         minScale={0.5}
         maxScale={4}
         wheel={{ step: 0.08 }}
