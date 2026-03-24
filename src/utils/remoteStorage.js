@@ -1,32 +1,29 @@
 /*
- * Remote JSON storage via jsonblob.com (free, no auth required).
- * All users share the same blob — edits are globally visible.
+ * Remote JSON storage via npoint.io (free, CORS-friendly, no auth).
+ * All users share the same document — edits are globally visible.
  *
- * On first deploy, the app auto-creates a blob and stores its ID
- * in localStorage. To share across deploys, set VITE_BLOB_ID in
+ * On first deploy, the app auto-creates a document and stores its ID
+ * in localStorage. To persist across deploys, set VITE_NPOINT_ID in
  * your Render environment variables.
  */
 
-const API = 'https://jsonblob.com/api/jsonBlob'
-const LOCAL_BLOB_KEY = 'tools-strategy-blob-id'
+const API = 'https://api.npoint.io'
+const LOCAL_KEY = 'tools-strategy-npoint-id'
 
-// Prefer env var (set in Render), fall back to localStorage
-function getBlobId() {
-  return import.meta.env.VITE_BLOB_ID || localStorage.getItem(LOCAL_BLOB_KEY)
+function getDocId() {
+  return import.meta.env.VITE_NPOINT_ID || localStorage.getItem(LOCAL_KEY)
 }
 
-function setBlobId(id) {
-  localStorage.setItem(LOCAL_BLOB_KEY, id)
+function setDocId(id) {
+  localStorage.setItem(LOCAL_KEY, id)
 }
 
 export async function loadRemoteEdits() {
-  const blobId = getBlobId()
-  if (!blobId) return {}
+  const docId = getDocId()
+  if (!docId) return {}
 
   try {
-    const res = await fetch(`${API}/${blobId}`, {
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-    })
+    const res = await fetch(`${API}/${docId}`)
     if (res.ok) {
       return await res.json()
     }
@@ -37,31 +34,29 @@ export async function loadRemoteEdits() {
 }
 
 export async function saveRemoteEdits(edits) {
-  const blobId = getBlobId()
+  const docId = getDocId()
 
   try {
-    if (blobId) {
-      // Update existing blob
-      await fetch(`${API}/${blobId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    if (docId) {
+      // Update existing document
+      await fetch(`${API}/${docId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(edits),
       })
     } else {
-      // Create new blob
+      // Create new document
       const res = await fetch(API, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(edits),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: JSON.stringify(edits) }),
       })
       if (res.ok) {
-        // Extract blob ID from Location header
-        const location = res.headers.get('Location')
-        if (location) {
-          const newId = location.split('/').pop()
-          setBlobId(newId)
-          console.log('Created remote blob:', newId)
-          console.log('Set VITE_BLOB_ID=' + newId + ' in Render env vars to persist across deploys')
+        const data = await res.json()
+        if (data && data.id) {
+          setDocId(data.id)
+          console.log('Created remote store:', data.id)
+          console.log('Set VITE_NPOINT_ID=' + data.id + ' in Render env vars to persist across deploys')
         }
       }
     }
