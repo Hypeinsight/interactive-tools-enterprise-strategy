@@ -137,8 +137,6 @@ export default function App() {
         </div>
         <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
         <div className="header-right">
-          <button className="header-icon-btn" onClick={exportEdits} title="Export tactic edits as JSON">↓ Export</button>
-          <button className="header-icon-btn" onClick={importEdits} title="Import tactic edits from JSON">↑ Import</button>
           <button
             className={`kate-toggle${kateMode ? ' active' : ''}`}
             onClick={() => setKateMode(k => !k)}
