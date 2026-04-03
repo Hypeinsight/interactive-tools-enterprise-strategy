@@ -1,6 +1,7 @@
 import React from 'react'
 import Hotspot from './Hotspot'
 import FlowPaths from './FlowPaths'
+import { KATE_TACTIC_OVERRIDES, KATE_FLOOR_OVERRIDES } from '../data/kateStrategy'
 
 const SVG_WIDTH = 1000
 const SVG_HEIGHT = 1300
@@ -90,7 +91,7 @@ function Roof() {
       {/* Title */}
       <text x={midX} y={peakY - 12} textAnchor="middle"
         fill="rgba(0,119,255,0.28)" fontSize={9} fontFamily="'Inter',sans-serif" fontWeight={700}
-        letterSpacing="0.15em">TOOLS™ ENTERPRISE MARKETING STRATEGY</text>
+        letterSpacing="0.15em">TOOLS™ ENTERPRISE BUILDER PLAN</text>
     </g>
   )
 }
@@ -127,9 +128,30 @@ function Foundation() {
   )
 }
 
+// ── Kate Mode: badge on hotspots with strategic notes ──
+function KateBadge({ x, y, badge, color }) {
+  const byc = y + 43
+  const bw = badge.length * 5.2 + 16
+  const bh = 12
+  return (
+    <g style={{ pointerEvents: 'none' }}>
+      <rect x={x - bw / 2} y={byc - bh / 2} width={bw} height={bh} rx={bh / 2}
+        fill={color} fillOpacity={0.18}
+        stroke={color} strokeWidth={0.8} strokeOpacity={0.75} />
+      <text x={x} y={byc + 3.8} textAnchor="middle"
+        fill={color} fillOpacity={0.95} fontSize={5.5}
+        fontFamily="'Inter',sans-serif" fontWeight={800}
+        letterSpacing="0.08em">
+        {badge}
+      </text>
+    </g>
+  )
+}
+
 // ── Single Floor ──
-function Floor({ id, floor }) {
+function Floor({ id, floor, kateSub }) {
   const { y, h, label, phase, sub, color } = floor
+  const displaySub = kateSub || sub
   return (
     <g>
       {/* Floor fill */}
@@ -149,9 +171,9 @@ function Floor({ id, floor }) {
         fontSize={8} fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.1em">
         {label} — {phase.toUpperCase()}
       </text>
-      <text x={BLDG_LEFT + 22} y={y + 23} fill={color} fillOpacity={0.35}
+      <text x={BLDG_LEFT + 22} y={y + 23} fill={color} fillOpacity={kateSub ? 0.55 : 0.35}
         fontSize={7} fontFamily="'Inter',sans-serif" fontWeight={500}>
-        {sub}
+        {displaySub}
       </text>
 
       {/* Large floor number watermark */}
@@ -268,11 +290,11 @@ function TitleBlock() {
         stroke="rgba(0,119,255,0.08)" strokeWidth={0.5} />
       <text x={670} y={SVG_HEIGHT - 56} fill="rgba(0,119,255,0.3)" fontSize={7}
         fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.08em">
-        TOOLS™ — ENTERPRISE MARKETING STRATEGY
+        TOOLS™ — ENTERPRISE BUILDER PLAN
       </text>
       <text x={670} y={SVG_HEIGHT - 42} fill="rgba(0,119,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
-        ELEVATION VIEW · SCALE: NTS · REV: 2.0 · DATE: 2026
+        ELEVATION VIEW · SCALE: NTS · REV: 2.1 · DATE: 2026
       </text>
       <text x={670} y={SVG_HEIGHT - 30} fill="rgba(0,119,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
@@ -297,7 +319,7 @@ function Compass() {
 }
 
 // ═══════════════════════════════════════
-export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic }) {
+export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic, kateMode }) {
   return (
     <svg
       viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
@@ -314,9 +336,9 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
 
       <Roof />
       <BuildingEnvelope />
-      <Floor id="convert" floor={FLOORS.convert} />
-      <Floor id="engage" floor={FLOORS.engage} />
-      <Floor id="awareness" floor={FLOORS.awareness} />
+      <Floor id="convert" floor={FLOORS.convert} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.convert?.sub : null} />
+      <Floor id="engage" floor={FLOORS.engage} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.engage?.sub : null} />
+      <Floor id="awareness" floor={FLOORS.awareness} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.awareness?.sub : null} />
       <Foundation />
       <Elevator />
       <Staircase />
@@ -333,6 +355,35 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
           onClick={onSelectTactic}
         />
       ))}
+
+      {/* Kate Strategy Overlay */}
+      {kateMode && (
+        <g className="kate-canvas-overlay">
+          {/* Mode indicator */}
+          <text x={SVG_WIDTH - 30} y={30} textAnchor="end"
+            fill="#BFE000" fillOpacity={0.38} fontSize={7.5}
+            fontFamily="'Inter',sans-serif" fontWeight={800}
+            letterSpacing="0.12em">
+            KATE’S STRATEGY OVERLAY
+          </text>
+          {/* Per-tactic badges */}
+          {tactics.map(tactic => {
+            const override = KATE_TACTIC_OVERRIDES[tactic.id]
+            if (!override) return null
+            const isVisible = activeFilter === 'all' || activeFilter === tactic.phase
+            if (!isVisible) return null
+            return (
+              <KateBadge
+                key={`kate-${tactic.id}`}
+                x={tactic.x}
+                y={tactic.y}
+                badge={override.badge}
+                color={override.badgeColor}
+              />
+            )
+          })}
+        </g>
+      )}
     </svg>
   )
 }

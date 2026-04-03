@@ -189,6 +189,22 @@ html, body, #root {
   pointer-events: none;
 }
 
+/* Deferred tactics — greyed out, pulse suppressed, dashed ring */
+.hotspot-group.deferred {
+  opacity: 0.32;
+  filter: grayscale(0.75);
+  cursor: default;
+}
+
+.hotspot-group.deferred .hotspot-pulse {
+  animation: none;
+  opacity: 0;
+}
+
+.hotspot-group.deferred .hotspot-dot {
+  stroke-dasharray: 4 2;
+}
+
 .hotspot-pulse {
   animation: pulse 2s ease-in-out infinite;
   transform-origin: center;
@@ -632,6 +648,113 @@ html, body, #root {
   color: var(--chrome-text-dim);
 }
 
+/* ─── Header Right Group ─── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ─── Kate Strategy Toggle ─── */
+.kate-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--chrome-border);
+  background: var(--chrome-bg);
+  backdrop-filter: blur(12px);
+  color: var(--chrome-text-dim);
+  font-family: var(--f);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.kate-toggle:hover {
+  background: rgba(191, 224, 0, 0.1);
+  border-color: rgba(191, 224, 0, 0.45);
+  color: #9ab800;
+}
+
+[data-theme="light"] .kate-toggle:hover {
+  color: #7a9400;
+}
+
+.kate-toggle.active {
+  background: rgba(191, 224, 0, 0.14);
+  border-color: rgba(191, 224, 0, 0.55);
+  color: #9ab800;
+  box-shadow: 0 0 12px rgba(191, 224, 0, 0.15);
+}
+
+[data-theme="light"] .kate-toggle.active {
+  color: #7a9400;
+}
+
+.kate-toggle-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.45;
+  flex-shrink: 0;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.kate-toggle.active .kate-toggle-dot {
+  opacity: 1;
+  box-shadow: 0 0 5px currentColor;
+}
+
+/* ─── Kate Note Card (Detail Panel) ─── */
+.kate-note {
+  background: rgba(191, 224, 0, 0.05);
+  border: 1px solid rgba(191, 224, 0, 0.18);
+  border-left: 3px solid #BFE000;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.kate-note-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.kate-note-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.kate-note-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: #7a9400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.kate-note-body {
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.68;
+}
+
 /* ─── Theme Toggle ─── */
 .theme-toggle {
   width: 40px;
@@ -647,7 +770,6 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
-  margin-left: 0.5rem;
 }
 
 .theme-toggle:hover {

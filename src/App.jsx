@@ -26,6 +26,7 @@ export default function App() {
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedTactic, setSelectedTactic] = useState(null)
   const [theme, setTheme] = useState('dark')
+  const [kateMode, setKateMode] = useState(false)
   const transformRef = useRef(null)
 
   // Load remote edits on mount (overrides local)
@@ -131,13 +132,23 @@ export default function App() {
           <img src="/Logo.png" alt="Tools™" style={{ height: '36px', objectFit: 'contain' }} />
           <div>
             <div className="header-title">Enterprise Marketing Strategy</div>
-            <div className="header-subtitle">Interactive Blueprint — 21 Tactics · 3 Phases</div>
+            <div className="header-subtitle">Enterprise Builder Plan · 21 Tactics · 3 Phases</div>
           </div>
         </div>
         <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
+        <div className="header-right">
+          <button
+            className={`kate-toggle${kateMode ? ' active' : ''}`}
+            onClick={() => setKateMode(k => !k)}
+            title={kateMode ? "Hide Kate's strategy changes" : "Show Kate's strategy changes"}
+          >
+            <span className="kate-toggle-dot" />
+            Kate's Strategy
+          </button>
+          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+        </div>
       </div>
 
       {/* Zoomable/Pannable Canvas */}
@@ -161,6 +172,7 @@ export default function App() {
               activeFilter={activeFilter}
               selectedTactic={selectedTactic}
               onSelectTactic={handleSelectTactic}
+              kateMode={kateMode}
             />
           </div>
         </TransformComponent>
@@ -180,7 +192,7 @@ export default function App() {
       </div>
 
       {/* Detail Side Panel */}
-      <DetailPanel tactic={selectedTactic} onClose={handleClosePanel} onUpdate={handleUpdateTactic} />
+      <DetailPanel tactic={selectedTactic} onClose={handleClosePanel} onUpdate={handleUpdateTactic} kateMode={kateMode} />
     </div>
   )
 }

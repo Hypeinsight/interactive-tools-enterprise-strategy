@@ -8,7 +8,8 @@ const PHASE_COLORS = {
 
 export default function Hotspot({ tactic, isVisible, isSelected, onClick }) {
   const color = PHASE_COLORS[tactic.phase] || '#0077FF'
-  const className = `hotspot-group${isVisible ? '' : ' hidden'}${isSelected ? ' selected' : ''}`
+  const isDeferred = tactic.status === 'deferred'
+  const className = `hotspot-group${isVisible ? '' : ' hidden'}${isSelected ? ' selected' : ''}${isDeferred ? ' deferred' : ''}`
 
   return (
     <g

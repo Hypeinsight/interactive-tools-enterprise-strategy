@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { KATE_TACTIC_OVERRIDES } from '../data/kateStrategy'
 
-export default function DetailPanel({ tactic, onClose, onUpdate }) {
+export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
   const isOpen = tactic !== null
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(null)
@@ -118,6 +119,29 @@ export default function DetailPanel({ tactic, onClose, onUpdate }) {
                 <div className="detail-hotspot-label">{tactic.hotspotLabel}</div>
               )}
               <div className={`detail-divider ${tactic.phase}`} />
+
+              {/* Kate Strategy Note */}
+              {kateMode && KATE_TACTIC_OVERRIDES[tactic.id] && (() => {
+                const ko = KATE_TACTIC_OVERRIDES[tactic.id]
+                return (
+                  <div className="kate-note">
+                    <div className="kate-note-header">
+                      <span
+                        className="kate-note-badge"
+                        style={{
+                          background: `${ko.badgeColor}22`,
+                          color: ko.badgeColor,
+                          borderColor: `${ko.badgeColor}88`,
+                        }}
+                      >
+                        {ko.badge}
+                      </span>
+                      <span className="kate-note-label">Kate’s Strategic Note</span>
+                    </div>
+                    <p className="kate-note-body">{ko.note}</p>
+                  </div>
+                )
+              })()}
 
               {/* Description */}
               <div className="detail-section-title">Description</div>
