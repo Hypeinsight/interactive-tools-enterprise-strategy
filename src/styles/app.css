@@ -655,6 +655,28 @@ html, body, #root {
   gap: 0.5rem;
 }
 
+/* ─── Header Icon Buttons (Export / Import) ─── */
+.header-icon-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--chrome-border);
+  background: var(--chrome-bg);
+  backdrop-filter: blur(12px);
+  color: var(--chrome-text-dim);
+  font-family: var(--f);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.header-icon-btn:hover {
+  background: var(--chrome-hover);
+  border-color: var(--blue);
+  color: var(--chrome-text);
+}
+
 /* ─── Kate Strategy Toggle ─── */
 .kate-toggle {
   display: flex;
