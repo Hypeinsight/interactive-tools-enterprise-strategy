@@ -24,6 +24,16 @@ export const KATE_TACTIC_OVERRIDES = {
     badgeColor: '#FF6B35',
     note: "Kate's #1 short-term action: lumpy direct mail to the top 50\u2013100 CRM accounts, followed immediately by a phone call. Physical mail cuts through digital noise, gives sales a tangible reason to call, and gets runs on the board before the HubSpot nurture campaign is ready. Quality over quantity \u2014 20 high-quality sends beats 100 generic ones. Kate has a merchandise contact who can deliver interesting items within budget.",
   },
+  6: {
+    badge: 'REFRAME',
+    badgeColor: '#BFE000',
+    note: "Current go-to-market content skews heavily residential. Commercial builders need to be addressed explicitly and separately — they respond to different pain points: compliance obligations, speed-to-delivery, defect liability, and process standardisation. Content strategy should produce distinct commercial-focused pieces, not adapt residential content. Kate's direct experience: when she brought a commercial division into a previously residential business, the difference in priorities, budgets, and decision-making was chalk and cheese. Commercial builders invest in compliance tools reflexively — they don't need to be sold on the why.",
+  },
+  14: {
+    badge: 'REFINE',
+    badgeColor: '#BFE000',
+    note: "Kate's events vision is distinct from the FCON-Tech trade show approach in the current plan. She recommends intimate roundtable lunches: 15\u201320 people, private room, no booths, no large-scale format. Start with one trial in Melbourne, then Sydney. The key mechanic: curated invite lists — when targets know who else is attending (peers, industry leaders), they show up. Kate has existing relationships she can bring to seed the first events. Face-to-face trust is the fastest sales cycle compressor in construction. Long-term, start charging for them and build a reputation as the go-to industry forum.",
+  },
   16: {
     badge: 'KEY ADDITION',
     badgeColor: '#00C2A8',
