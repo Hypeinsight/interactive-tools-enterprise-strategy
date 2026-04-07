@@ -137,7 +137,7 @@ const CJ_STAGES = {
   6:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
   7:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
   8:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
-  10: { stage: 'TRIAL',    track: 'both',       color: '#FF9500' },
+  10: { stage: 'TRIAL',    track: 'enterprise', color: '#BFE000' },
   11: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
   12: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
   13: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },

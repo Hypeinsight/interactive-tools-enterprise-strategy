@@ -92,10 +92,9 @@ export default function FlowPaths() {
       <Solid from={5} to={7} color={B} opacity={0.1} />
       <Solid from={5} to={8} color={B} opacity={0.1} />
 
-      {/* GENERIC CAMPAIGN — Meta + Google → Trial → PRO */}
-      <Animated id="g1" from={22} to={10} color={G} pc={G} opacity={0.18} width={1.2} />
-      <Animated id="g2" from={23} to={10} color={G} pc={G} opacity={0.18} width={1.2} />
-      <Dashed from={10} to={20} color={G} opacity={0.14} />
+      {/* GENERIC CAMPAIGN — Meta + Google → PRO Conversion (self-serve) */}
+      <Animated id="g1" from={22} to={20} color={G} pc={G} opacity={0.18} width={1.2} />
+      <Animated id="g2" from={23} to={20} color={G} pc={G} opacity={0.18} width={1.2} />
       <Label x={620} y={1020} text="GENERIC CAMPAIGN" color={G} />
 
       {/* AWARENESS → ENGAGE cross-phase */}
