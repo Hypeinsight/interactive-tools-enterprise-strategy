@@ -87,9 +87,17 @@ export default function App() {
     transformRef.current?.zoomOut(0.5)
   }, [])
 
-  const handleReset = useCallback(() => {
-    transformRef.current?.centerView(1.4)
+  const goToTop = useCallback((ref) => {
+    const r = ref ?? transformRef.current
+    if (!r) return
+    const wrapperWidth = r.instance?.wrapperComponent?.clientWidth ?? window.innerWidth
+    const posX = Math.max(0, (wrapperWidth - 1000 * 1.4) / 2)
+    r.setTransform(posX, 10, 1.4, 0)
   }, [])
+
+  const handleReset = useCallback(() => {
+    goToTop()
+  }, [goToTop])
 
   const exportEdits = useCallback(() => {
     const data = localStorage.getItem(STORAGE_KEY) || '{}'
@@ -155,12 +163,13 @@ export default function App() {
       <TransformWrapper
         ref={transformRef}
         initialScale={1.4}
-        centerOnInit={true}
+        centerOnInit={false}
         minScale={0.5}
         maxScale={4}
         wheel={{ step: 0.08 }}
         panning={{ velocityDisabled: true }}
         doubleClick={{ disabled: true }}
+        onInit={goToTop}
       >
         <TransformComponent
           wrapperStyle={{ width: '100%', height: '100%' }}
