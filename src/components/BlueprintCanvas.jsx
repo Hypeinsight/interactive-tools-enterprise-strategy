@@ -4,7 +4,7 @@ import FlowPaths from './FlowPaths'
 import { KATE_TACTIC_OVERRIDES, KATE_FLOOR_OVERRIDES } from '../data/kateStrategy'
 
 const SVG_WIDTH = 1000
-const SVG_HEIGHT = 1300
+const SVG_HEIGHT = 1500
 
 // ── Floor definitions (bottom to top) ──
 const FLOORS = {
@@ -165,6 +165,118 @@ function CJBadge({ x, y, stage, color }) {
         fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.07em">
         {stage}
       </text>
+    </g>
+  )
+}
+
+function GenericCampaignDashboard() {
+  const x = 82, y = 1305, w = 888, h = 82
+  const rows = [
+    { label: 'Current monthly budget', value: '~$1,000',    note: 'Very limited — needs to scale once CPA is confirmed and attribution is fixed' },
+    { label: 'CPA — trial start',       value: '~$8 ✓',     note: 'Strong signal and a good baseline to build from' },
+    { label: 'CPA — PRO conversion',    value: 'TBD',        note: 'Attribution fix in progress (Buck/Michelle, dev priority) — cannot optimise until this is resolved' },
+    { label: 'Daily PRO target',          value: '10.45/day', note: "= $3,000/day annualised revenue at $287/yr — Jerry's goal (3K/day = 10.45 new PROs)" },
+    { label: 'Budget to reach target',   value: '~$3–5K/mo', note: 'Estimate once CPA confirmed → reinvest revenue → scale up → long-term vision: $300K/month' },
+  ]
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={3}
+        fill="rgba(255,149,0,0.02)" stroke="#FF9500" strokeWidth={0.5} strokeOpacity={0.3} />
+      <rect x={x} y={y} width={w} height={14} rx={3}
+        fill="rgba(255,149,0,0.08)" stroke="none" />
+      <text x={x + 8} y={y + 10} fill="#FF9500" fillOpacity={0.75} fontSize={6.5}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.1em">
+        GENERIC CAMPAIGN — BUDGET &amp; CPA SNAPSHOT
+      </text>
+      <text x={x + 440} y={y + 10} fill="#FF9500" fillOpacity={0.38} fontSize={5.5}
+        fontFamily="'Inter',sans-serif" fontWeight={600}>
+        current state · what we need to reach 10.45 PROs/day · scale model
+      </text>
+      {rows.map(({ label, value, note }, i) => (
+        <g key={i}>
+          <text x={x + 10} y={y + 24 + i * 12} fill="#FF9500" fillOpacity={0.55} fontSize={5.5}
+            fontFamily="'Inter',sans-serif" fontWeight={600}>{label}</text>
+          <text x={x + 178} y={y + 24 + i * 12} fill="#FF9500" fillOpacity={0.9} fontSize={5.5}
+            fontFamily="'Inter',sans-serif" fontWeight={800}>{value}</text>
+          <text x={x + 262} y={y + 24 + i * 12} fill="#FF9500" fillOpacity={0.5} fontSize={5}
+            fontFamily="'Inter',sans-serif" fontWeight={500}>{note}</text>
+        </g>
+      ))}
+    </g>
+  )
+}
+
+function CJComparisonPanel() {
+  const x = 82, y = 1400, w = 888, h = 88
+  const midX = x + Math.floor(w / 2)
+  const gStages = ['DISCOVER', 'CONSIDER', 'TRIAL', 'BUY PRO', 'EXPAND']
+  const gSubs   = ['See ad', 'Click/visit', 'Free trial', '$287/yr', 'Enterprise']
+  const eStages = ['IDENTIFY', 'OUTREACH', 'ENGAGE', 'QUALIFY', 'PROPOSE', 'CLOSE']
+  const eSubs   = ['ICP + CRM', 'Mail/EDMs', 'Events/video', 'MQL→SQL', 'Discovery', 'Contract']
+  const eColors = ['#0077FF', '#0077FF', '#BFE000', '#BFE000', '#00C2A8', '#00C2A8']
+  const gStartX = x + 52, gSpacing = 88
+  const eStartX = midX + 32, eSpacing = 73
+  const nodeY = y + 62
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={3}
+        fill="rgba(26,31,46,0.85)" stroke="rgba(0,194,168,0.2)" strokeWidth={0.5} />
+      <text x={x + w / 2} y={y + 11} textAnchor="middle"
+        fill="#00C2A8" fillOpacity={0.65} fontSize={7}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.1em">
+        CUSTOMER JOURNEY MAP vs OMNI-CHANNEL STRATEGY
+      </text>
+      <line x1={midX} y1={y + 15} x2={midX} y2={y + h - 5}
+        stroke="rgba(255,255,255,0.06)" strokeWidth={0.5} strokeDasharray="3,3" />
+      <circle cx={gStartX - 16} cy={y + 26} r={2.5} fill="#FF9500" />
+      <text x={gStartX - 10} y={y + 29.5} fill="#FF9500" fillOpacity={0.75} fontSize={5.8}
+        fontFamily="'Inter',sans-serif" fontWeight={800}>
+        GENERIC  (Meta + Google → Self-Serve PRO)
+      </text>
+      <circle cx={eStartX - 16} cy={y + 26} r={2.5} fill="#0077FF" />
+      <text x={eStartX - 10} y={y + 29.5} fill="#0077FF" fillOpacity={0.75} fontSize={5.8}
+        fontFamily="'Inter',sans-serif" fontWeight={800}>
+        ENTERPRISE ABM  (Top 100 Accounts → Direct Sales)
+      </text>
+      {gStages.map((stage, i) => {
+        const nx = gStartX + i * gSpacing
+        return (
+          <g key={`gn${i}`}>
+            {i < gStages.length - 1 && (
+              <line x1={nx + 7} y1={nodeY} x2={nx + gSpacing - 7} y2={nodeY}
+                stroke="#FF9500" strokeWidth={0.6} strokeOpacity={0.25} />
+            )}
+            <circle cx={nx} cy={nodeY} r={5} fill="#FF9500" fillOpacity={0.18}
+              stroke="#FF9500" strokeWidth={0.7} strokeOpacity={0.55} />
+            <text x={nx} y={nodeY - 9} textAnchor="middle"
+              fill="#FF9500" fillOpacity={0.8} fontSize={5}
+              fontFamily="'Inter',sans-serif" fontWeight={800}>{stage}</text>
+            <text x={nx} y={nodeY + 13} textAnchor="middle"
+              fill="#FF9500" fillOpacity={0.5} fontSize={4.5}
+              fontFamily="'Inter',sans-serif" fontWeight={500}>{gSubs[i]}</text>
+          </g>
+        )
+      })}
+      {eStages.map((stage, i) => {
+        const nx = eStartX + i * eSpacing
+        const color = eColors[i]
+        return (
+          <g key={`en${i}`}>
+            {i < eStages.length - 1 && (
+              <line x1={nx + 7} y1={nodeY} x2={nx + eSpacing - 7} y2={nodeY}
+                stroke={color} strokeWidth={0.6} strokeOpacity={0.25} />
+            )}
+            <circle cx={nx} cy={nodeY} r={5} fill={color} fillOpacity={0.18}
+              stroke={color} strokeWidth={0.7} strokeOpacity={0.55} />
+            <text x={nx} y={nodeY - 9} textAnchor="middle"
+              fill={color} fillOpacity={0.8} fontSize={5}
+              fontFamily="'Inter',sans-serif" fontWeight={800}>{stage}</text>
+            <text x={nx} y={nodeY + 13} textAnchor="middle"
+              fill={color} fillOpacity={0.5} fontSize={4.5}
+              fontFamily="'Inter',sans-serif" fontWeight={500}>{eSubs[i]}</text>
+          </g>
+        )
+      })}
     </g>
   )
 }
@@ -349,21 +461,21 @@ function Staircase() {
 function TitleBlock() {
   return (
     <g>
-      <rect x={660} y={SVG_HEIGHT - 70} width={300} height={55} rx={2}
+      <rect x={660} y={1230} width={300} height={55} rx={2}
         fill="rgba(0,119,255,0.02)" stroke="rgba(0,119,255,0.12)" strokeWidth={0.5} />
-      <line x1={660} y1={SVG_HEIGHT - 52} x2={960} y2={SVG_HEIGHT - 52}
+      <line x1={660} y1={1248} x2={960} y2={1248}
         stroke="rgba(0,119,255,0.08)" strokeWidth={0.5} />
-      <text x={670} y={SVG_HEIGHT - 56} fill="rgba(0,119,255,0.3)" fontSize={7}
+      <text x={670} y={1244} fill="rgba(0,119,255,0.3)" fontSize={7}
         fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.08em">
         TOOLS™ — ENTERPRISE BUILDER PLAN
       </text>
-      <text x={670} y={SVG_HEIGHT - 42} fill="rgba(0,119,255,0.2)" fontSize={6}
+      <text x={670} y={1258} fill="rgba(0,119,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
-        ELEVATION VIEW · SCALE: NTS · REV: 2.1 · DATE: 2026
+        ELEVATION VIEW · SCALE: NTS · REV: 2.2 · DATE: 2026
       </text>
-      <text x={670} y={SVG_HEIGHT - 30} fill="rgba(0,119,255,0.2)" fontSize={6}
+      <text x={670} y={1270} fill="rgba(0,119,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
-        SHEET: 1 OF 1 · 21 TACTICS · 3 PHASES · 3 STOREYS
+        SHEET: 1 OF 1 · 23 TACTICS · 2 CAMPAIGNS · 3 PHASES
       </text>
     </g>
   )
@@ -372,7 +484,7 @@ function TitleBlock() {
 // ── Compass ──
 function Compass() {
   return (
-    <g transform={`translate(60, ${SVG_HEIGHT - 45})`}>
+    <g transform={`translate(60, 1255)`}>
       <circle cx={0} cy={0} r={14} fill="none" stroke="rgba(0,119,255,0.1)" strokeWidth={0.5} />
       <line x1={0} y1={-12} x2={0} y2={12} stroke="rgba(0,119,255,0.12)" strokeWidth={0.5} />
       <line x1={-12} y1={0} x2={12} y2={0} stroke="rgba(0,119,255,0.12)" strokeWidth={0.5} />
@@ -410,6 +522,8 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <FlowPaths />
       <TitleBlock />
       <Compass />
+      <GenericCampaignDashboard />
+      <CJComparisonPanel />
 
       {tactics.map(tactic => {
         const isVisible =

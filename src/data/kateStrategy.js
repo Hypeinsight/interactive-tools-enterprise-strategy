@@ -24,6 +24,11 @@ export const KATE_TACTIC_OVERRIDES = {
     badgeColor: '#FF6B35',
     note: "Kate's #1 short-term action: lumpy direct mail to the top 50\u2013100 CRM accounts, followed immediately by a phone call. Physical mail cuts through digital noise, gives sales a tangible reason to call, and gets runs on the board before the HubSpot nurture campaign is ready. Quality over quantity \u2014 20 high-quality sends beats 100 generic ones. Kate has a merchandise contact who can deliver interesting items within budget.",
   },
+  7: {
+    badge: 'LEAD QUALITY',
+    badgeColor: '#FF9500',
+    note: "Ari raised a valid concern: enterprise ads will initially generate a mix of lead quality — some unsuitable prospects wanting demos, which wastes sales time. Kate's position: in the early stages you have to cast your net wide. No lead is truly bad. Every response, qualified or not, gives you data to tighten targeting. The cost of a few unqualified demos is far less than under-investing and never learning. Siva agrees: send everything through and Kate can qualify on the call. Marketing leads are a bonus on top of proactive CRM outreach — once the pipeline sharpens, so will the ads.",
+  },
   6: {
     badge: 'REFRAME',
     badgeColor: '#BFE000',
