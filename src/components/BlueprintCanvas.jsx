@@ -170,7 +170,7 @@ function CJBadge({ x, y, stage, color }) {
 }
 
 function GenericCampaignDashboard() {
-  const x = 82, y = 1305, w = 888, h = 82
+  const x = 82, y = 108, w = 888, h = 82
   const rows = [
     { label: 'Current monthly budget', value: '~$1,000',    note: 'Very limited — needs to scale once CPA is confirmed and attribution is fixed' },
     { label: 'CPA — trial start',       value: '~$8 ✓',     note: 'Strong signal and a good baseline to build from' },
@@ -207,7 +207,7 @@ function GenericCampaignDashboard() {
 }
 
 function CJComparisonPanel() {
-  const x = 82, y = 1400, w = 888, h = 88
+  const x = 82, y = 10, w = 888, h = 88
   const midX = x + Math.floor(w / 2)
   const gStages = ['DISCOVER', 'CONSIDER', 'TRIAL', 'BUY PRO', 'EXPAND']
   const gSubs   = ['See ad', 'Click/visit', 'Free trial', '$287/yr', 'Enterprise']
@@ -511,6 +511,12 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <rect x={25} y={25} width={SVG_WIDTH - 50} height={SVG_HEIGHT - 50} rx={2}
         fill="none" stroke="rgba(0,119,255,0.08)" strokeWidth={0.5} />
 
+      {/* Strategy overview panels — above the building */}
+      <CJComparisonPanel />
+      <GenericCampaignDashboard />
+
+      {/* Building blueprint — shifted down to make room for overview panels */}
+      <g transform="translate(0, 210)">
       <Roof />
       <BuildingEnvelope />
       <Floor id="convert" floor={FLOORS.convert} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.convert?.sub : null} />
@@ -519,11 +525,16 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <Foundation />
       <Elevator />
       <Staircase />
+      {/* Generic campaign zone — right side of awareness floor */}
+      <rect x={650} y={880} width={270} height={340} fill="rgba(255,149,0,0.022)" />
+      <line x1={650} y1={880} x2={650} y2={1220}
+        stroke="#FF9500" strokeWidth={0.4} strokeOpacity={0.14} strokeDasharray="4,4" />
+      <text x={786} y={1210} textAnchor="middle"
+        fill="#FF9500" fillOpacity={0.09} fontSize={13}
+        fontFamily="'Inter',sans-serif" fontWeight={900} letterSpacing="0.12em">GENERIC</text>
       <FlowPaths />
       <TitleBlock />
       <Compass />
-      <GenericCampaignDashboard />
-      <CJComparisonPanel />
 
       {tactics.map(tactic => {
         const isVisible =
@@ -592,6 +603,7 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
           })}
         </g>
       )}
+      </g>
     </svg>
   )
 }

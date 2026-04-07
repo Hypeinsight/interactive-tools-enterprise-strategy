@@ -137,8 +137,8 @@
     },
     {
         "id":  7,
-        "hotspotLabel":  "Social Ads",
-        "name":  "Enterprise Social Ads (LinkedIn + Google)",
+        "hotspotLabel":  "LinkedIn Ads",
+        "name":  "Enterprise LinkedIn Ads \u0026 Google Conquesting",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
         "campaignType":  "enterprise",
@@ -431,7 +431,7 @@
                         "Creative: use best-performing existing ads as baseline, test construction compliance hooks",
                         "Explore Google payment terms via Ari's contacts to ease cash flow constraints on ad spend"
                     ],
-        "x":  420,
+        "x":  700,
         "y":  1060
     },
     {
