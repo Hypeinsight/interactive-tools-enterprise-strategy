@@ -1,10 +1,12 @@
-﻿[
+[
     {
         "id":  1,
         "hotspotLabel":  "ICP \u0026 Account Tiering",
         "name":  "Enterprise ICP \u0026 Account Segmentation",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Defining the top 100 target accounts using a rigorous 3-tier segmentation model based on strategic value, workforce size, and compliance risk exposure. Enterprise ABM does not treat all accounts equally — resources are allocated based on tier.",
         "targetAudience":  "Internal: Sales \u0026 Marketing Leadership",
         "details":  [
@@ -22,6 +24,8 @@
         "name":  "Buying Committee Persona Framework",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Enterprise deals involve 6–11 stakeholders across the buying committee. Tools™ must map and tailor messaging to each persona within every target account to multi-thread effectively.",
         "targetAudience":  "All Personas within Target Accounts",
         "details":  [
@@ -40,6 +44,8 @@
         "name":  "Account Planning \u0026 Intelligence",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Creating detailed account dossiers for Tier 1 and Tier 2 targets, including recent company news, major project wins, identified stakeholders, and hypotheses on their specific compliance pain points.",
         "targetAudience":  "Tier 1 \u0026 Tier 2 Enterprise Accounts",
         "details":  [
@@ -57,6 +63,8 @@
         "name":  "Mining Existing Database",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Identifying current free users or Individual PRO users employed by target Tier 1 and Tier 2 firms to serve as internal champions and first-party intent signals.",
         "targetAudience":  "Existing Free Users at Target Firms",
         "details":  [
@@ -75,6 +83,8 @@
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
         "status":  "deferred",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "ACTIVATE LATER: Once the internal known-contacts pathway is mastered, employ external data enrichment tools to identify Quality Directors, COOs, and IT Directors not yet in the CRM, completing the buying committee map at each target account.",
         "targetAudience":  "Quality Directors, COOs, IT Directors",
         "details":  [
@@ -92,6 +102,8 @@
         "name":  "High-Value Direct Mail \u0026 Executive Gifting",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Physical pattern interrupts to command executive attention. In an era of overflowing digital inboxes, direct mail serves as a powerful differentiator that becomes a topic of conversation within the target account.",
         "targetAudience":  "C-Suite at Tier 1 Accounts",
         "details":  [
@@ -110,6 +122,8 @@
         "name":  "Omni-channel Content Distribution",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Flooding the market with high-value thought leadership content across multiple channels, focusing on the cost of defects, NCC complexity, and digital compliance transformation.",
         "targetAudience":  "Entire Construction Industry",
         "details":  [
@@ -124,17 +138,19 @@
     {
         "id":  7,
         "hotspotLabel":  "Social Ads",
-        "name":  "Targeted Advertising \u0026 Competitor Conquesting",
+        "name":  "Enterprise Social Ads (LinkedIn + Google)",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
-        "description":  "Running targeted ads to buying committee personas within the top 100 accounts, including competitor conquesting ads to capture high-intent accounts researching alternatives.",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
+        "description":  "Running targeted LinkedIn PPC and Google competitor conquesting ads to buying committee personas within the top 100 enterprise accounts. This is the enterprise-specific paid media campaign — separate from the Generic Campaign (Meta + Google) targeting all builder sizes.",
         "targetAudience":  "Buying Committee in Top 100 Accounts",
         "details":  [
-                        "Primary channel: LinkedIn — precise account and persona targeting not replicable on Meta for enterprise",
+                        "Primary channel: LinkedIn PPC — precise account and persona targeting, ~$18 CPC (was $60, now more affordable)",
                         "Google Search: competitor conquesting ads — \"Tools vs. Hammertech\", \"Procore Alternatives\"",
-                        "Google Display Remarketing: cookie ABM landing page visitors and remarket across display network (news, industry sites)",
-                        "Meta excluded from enterprise plan — broader awareness only, separate future initiative",
-                        "Focus on thought leadership: cost of defects, NCC complexity, digital compliance transformation"
+                        "Google Display Remarketing: cookie ABM landing page visitors and remarket across display network",
+                        "LinkedIn requires a completely different strategy vs. Meta/Google — activate after generic campaign proves CPA",
+                        "Scale trigger: once Generic Campaign attribution is confirmed and budget allows, shift to LinkedIn"
                     ],
         "x":  550,
         "y":  930
@@ -145,6 +161,8 @@
         "name":  "3-Part Short Sequence",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
         "description":  "Deploying a concise, impactful email sequence to the curated target list designed to generate initial awareness and interest before the full engagement cadence begins.",
         "targetAudience":  "Curated Target List",
         "details":  [
@@ -162,10 +180,13 @@
         "name":  "Product-Led Growth Escalation",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
-        "description":  "Leveraging existing free-tier usage within enterprise accounts as the ultimate first-party intent data source. When site managers at a Tier 1 firm begin using the free version, this signals a massive enterprise opportunity.",
-        "targetAudience":  "Tier 1 Builders, Existing Free Users",
+        "campaignType":  "both",
+        "execPhase":  1,
+        "description":  "Leveraging existing free-tier usage within enterprise accounts as the ultimate first-party intent data source. Also the primary conversion path for the Generic Campaign — when builders sign up via Meta/Google ads, PLG tracks their trial usage and either converts them to PRO or escalates them to enterprise.",
+        "targetAudience":  "All Trial Users, Tier 1 Builders with Existing Free Users",
         "details":  [
-                        "Executive Escalation: \"Hi [CIO], three of your site teams are using Tools™. Can I show you the executive dashboard?\"",
+                        "Generic Track: ad click → free trial → PRO subscription ($287/year) → potential enterprise",
+                        "Enterprise Track: \"Hi [CIO], three of your site teams are using Tools™. Can I show you the executive dashboard?\"",
                         "Create confidential internal case studies using actual product usage data",
                         "Show how one division was successful to sell enterprise-wide licence to procurement/IT",
                         "Upsell path: Free → Individual PRO → Enterprise"
@@ -179,6 +200,8 @@
         "name":  "Video Prospecting",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Sales reps recording short, personalised 60-second videos showing the prospect\u0027s actual website or a mock-up of their project inside the Tools™ interface. This pattern interrupt is highly effective for executive outreach.",
         "targetAudience":  "Key Decision Makers at Target Accounts",
         "details":  [
@@ -196,6 +219,8 @@
         "name":  "VIP Experiences \u0026 FCON-Tech Strategy",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Orchestrating targeted micro-events and VIP experiences around major industry gatherings. Face-to-face trust is paramount in enterprise construction — events condense the sales cycle by creating high-touch interactions.",
         "targetAudience":  "Tier 1 Executives, Industry Leaders",
         "details":  [
@@ -216,6 +241,8 @@
         "name":  "Layered Targeting \u0026 Social Selling",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Moving beyond job titles to target by function and seniority with a hyper-personalised warm-up sequence. Upload the verified top 100 account list directly into LinkedIn Campaign Manager for precision targeting.",
         "targetAudience":  "Buying Committee across Target Accounts",
         "details":  [
@@ -233,6 +260,8 @@
         "name":  "Intent-Driven Email Cadence",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Deliberately multi-threading to three or more roles across the buying committee simultaneously. True ABM email requires account-specific relevance in the very first line — if a template can be sent to 500 people without alteration, it is not ABM.",
         "targetAudience":  "3+ Roles in the Buying Committee",
         "details":  [
@@ -250,6 +279,8 @@
         "name":  "1:1 and 1:Few Web Experiences",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Custom-built landing pages for each target account. Generic homepages do not convert enterprise buyers — they should land on a page built specifically for them, featuring their logo, tailored messaging, and relevant case studies.",
         "targetAudience":  "Top 15 Accounts \u0026 Key Verticals",
         "details":  [
@@ -269,6 +300,8 @@
         "name":  "Initial Sales Process",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Deep-diving into compliance challenges and presenting the tailored Tools™ solution to qualified prospects, supported by the full arsenal of enterprise sales collateral.",
         "targetAudience":  "Qualified Enterprise Prospects",
         "details":  [
@@ -286,6 +319,8 @@
         "name":  "Weaponising Existing Assets",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Tools™ has unique competitive advantages that must be systematically deployed across all ABM touchpoints — endorsements from Tier 1 clients, certifications, patents, and the CPD partnership.",
         "targetAudience":  "All Enterprise Prospects",
         "details":  [
@@ -303,6 +338,8 @@
         "name":  "Customised Proposals \u0026 Enablement",
         "phase":  "convert",
         "phaseLabel":  "Phase 3: Convert",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Once an opportunity is created, marketing supports sales to accelerate the deal with tailored business cases and enablement resources for the internal champion.",
         "targetAudience":  "Active Pipeline Opportunities",
         "details":  [
@@ -320,6 +357,8 @@
         "name":  "Final Sales Process",
         "phase":  "convert",
         "phaseLabel":  "Phase 3: Convert",
+        "campaignType":  "enterprise",
+        "execPhase":  2,
         "description":  "Presenting the formal proposal and securing the enterprise contract, leveraging the full weight of Tier 1 endorsements and proven ROI.",
         "targetAudience":  "Decision Makers \u0026 Procurement",
         "details":  [
@@ -337,11 +376,13 @@
         "name":  "Routing \u0026 Immediate Value",
         "phase":  "convert",
         "phaseLabel":  "Phase 3: Convert",
-        "description":  "Handling outcomes based on self-qualification, routing prospects to the appropriate conversion path with immediate value delivery.",
+        "campaignType":  "both",
+        "execPhase":  2,
+        "description":  "Handling outcomes based on self-qualification, routing prospects to the appropriate conversion path. Generic Campaign users self-serve to PRO; Enterprise prospects book a demo and enter the sales process.",
         "targetAudience":  "All Qualified Leads",
         "details":  [
-                        "Small Teams → \"Buy Now\" self-serve",
-                        "Enterprise Teams → \"Book A Demo\"",
+                        "Generic Track: \"Buy Now\" self-serve PRO subscription ($287/year) — target 10.45 new PROs/day",
+                        "Enterprise Track: \"Book A Demo\" → enters enterprise sales process",
                         "Receive immediate value: 10 Enterprise Playbooks",
                         "Qualify for 30 Days Complimentary PRO Access",
                         "30-Day Quick Win pathway: structured onboarding milestones to achieve measurable value fast — change inertia (not price) is the #1 adoption barrier",
@@ -356,15 +397,63 @@
         "name":  "Account-Centric Metrics Framework",
         "phase":  "convert",
         "phaseLabel":  "Phase 3: Convert",
-        "description":  "Traditional lead-gen metrics (cost per lead, total traffic) are insufficient for enterprise ABM. Success is measured using account-centric metrics that track engagement depth, pipeline quality, and deal velocity.",
+        "campaignType":  "both",
+        "execPhase":  2,
+        "description":  "Traditional lead-gen metrics (cost per lead, total traffic) are insufficient for enterprise ABM. Both campaigns require distinct KPI frameworks. Generic Campaign: PRO conversion rate, CPA (trial ~$8, PRO TBD pending attribution fix). Enterprise: account engagement, pipeline value, deal velocity.",
         "targetAudience":  "Internal: Sales \u0026 Marketing Leadership",
         "details":  [
+                        "Generic Campaign KPIs: PRO conversions/day (target: 10.45), CPA trial start (~$8), CPA PRO conversion (TBD — attribution fix required)",
+                        "Generic Campaign budget: ~$1K/month now — scale to $3–5K/month once CPA confirmed",
+                        "Enterprise KPIs: MQAs (marketing validated accounts), SQOs, pipeline value, conversion rate, sales cycle length",
                         "Account Engagement: % of target accounts engaged, stakeholders engaged per account",
-                        "Pipeline Generation: SQOs from top 100, total pipeline value from target accounts",
                         "Deal Velocity: Average time from first engagement to closed-won (ABM should shorten this)",
                         "Revenue \u0026 ROI: Enterprise ARR generated, expansion revenue, overall ABM program ROI"
                     ],
         "x":  750,
         "y":  180
+    },
+    {
+        "id":  22,
+        "hotspotLabel":  "Meta Ads",
+        "name":  "Meta Ads — Generic Campaign",
+        "phase":  "awareness",
+        "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "generic",
+        "execPhase":  1,
+        "description":  "Broad-reach Facebook and Instagram advertising targeting builders of all sizes across Australia. Unlike the Enterprise ABM plan, the Generic Campaign does not restrict to the top 100 accounts — it casts a wide net to drive trial starts and PRO conversions at scale. Purpose: hit Jerry's revenue target of 10.45 new PRO subscribers per day.",
+        "targetAudience":  "All Australian Builders — Small, Medium \u0026 Large",
+        "details":  [
+                        "Target: 10.45 new PRO conversions/day ($3K/day annualised at $287/year)",
+                        "Current monthly budget: ~$1,000 (very limited — scale once attribution is confirmed)",
+                        "Current CPA trial start: ~$8 — strong signal, good baseline",
+                        "CPA PRO conversion: TBD — awaiting attribution fix (dev priority, Buck/Michelle tracking)",
+                        "Scale model: confirm CPA → reinvest revenue → scale to $3–5K/month → prove → $300K/month vision",
+                        "Creative: use best-performing existing ads as baseline, test construction compliance hooks",
+                        "Explore Google payment terms via Ari's contacts to ease cash flow constraints on ad spend"
+                    ],
+        "x":  420,
+        "y":  1060
+    },
+    {
+        "id":  23,
+        "hotspotLabel":  "Google Ads",
+        "name":  "Google Ads — Generic Campaign",
+        "phase":  "awareness",
+        "phaseLabel":  "Phase 1: Awareness",
+        "campaignType":  "generic",
+        "execPhase":  1,
+        "description":  "Google Search and Display advertising capturing builders actively searching for compliance tools, NCC updates, and building code software. Runs in parallel with Meta as the second primary channel in the Generic Campaign. LinkedIn is excluded from the generic campaign — its CPC (~$18) makes it too expensive at current budget and it requires an entirely different strategy.",
+        "targetAudience":  "Builders Actively Searching for Compliance Solutions",
+        "details":  [
+                        "Search campaigns: builders searching for NCC compliance tools, building code software, Procore/Hammertech alternatives",
+                        "Display remarketing: cookie website visitors and trial starters across Google Display Network",
+                        "Current CPA trial: ~$8 (combined with Meta — exact per-channel split TBD with attribution)",
+                        "LinkedIn excluded from generic campaign — reserved for Enterprise ABM once budget allows",
+                        "Priority: scale Meta + Google first, prove CPA, then use that revenue to fund LinkedIn enterprise ads",
+                        "Ari is exploring Google payment terms directly — could allow spending ahead of revenue to accelerate scale",
+                        "Jerry metric: $3K/day annualised revenue = 10.45 new PRO subs/day at $287/year"
+                    ],
+        "x":  820,
+        "y":  1060
     }
 ]

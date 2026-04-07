@@ -5,6 +5,7 @@ const FILTERS = [
   { key: 'awareness', label: 'Awareness' },
   { key: 'engage', label: 'Engage' },
   { key: 'convert', label: 'Convert' },
+  { key: 'generic', label: 'Generic Ads' },
 ]
 
 export default function FilterBar({ activeFilter, onFilterChange }) {

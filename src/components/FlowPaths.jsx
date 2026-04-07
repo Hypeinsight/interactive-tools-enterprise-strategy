@@ -3,6 +3,7 @@ import React from 'react'
 const H = {
   1:{x:200,y:1160}, 2:{x:420,y:1160}, 3:{x:640,y:1160},
   4:{x:220,y:1060},  5:{x:620,y:1060},
+  22:{x:420,y:1060}, 23:{x:820,y:1060},
   6:{x:380,y:930},   7:{x:550,y:930},  8:{x:740,y:930},  9:{x:180,y:930},
   10:{x:160,y:715}, 11:{x:310,y:715}, 12:{x:570,y:715}, 13:{x:700,y:715},
   14:{x:450,y:715}, 15:{x:840,y:715}, 16:{x:680,y:545}, 17:{x:420,y:545},
@@ -76,7 +77,7 @@ function Gateway({ x, y, label, sub, color }) {
   )
 }
 
-const B='#0077FF', L='#BFE000', T='#00C2A8'
+const B='#0077FF', L='#BFE000', T='#00C2A8', G='#FF9500'
 
 export default function FlowPaths() {
   return (
@@ -90,6 +91,12 @@ export default function FlowPaths() {
       <Solid from={4} to={9} color={B} opacity={0.1} />
       <Solid from={5} to={7} color={B} opacity={0.1} />
       <Solid from={5} to={8} color={B} opacity={0.1} />
+
+      {/* GENERIC CAMPAIGN — Meta + Google → Trial → PRO */}
+      <Animated id="g1" from={22} to={10} color={G} pc={G} opacity={0.18} width={1.2} />
+      <Animated id="g2" from={23} to={10} color={G} pc={G} opacity={0.18} width={1.2} />
+      <Dashed from={10} to={20} color={G} opacity={0.14} />
+      <Label x={620} y={1020} text="GENERIC CAMPAIGN" color={G} />
 
       {/* AWARENESS → ENGAGE cross-phase */}
       <Animated id="a" from={4} to={10} color={B} pc={L} opacity={0.15} />

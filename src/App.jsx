@@ -132,7 +132,7 @@ export default function App() {
           <img src="/Logo.png" alt="Tools™" style={{ height: '36px', objectFit: 'contain' }} />
           <div>
             <div className="header-title">Enterprise Marketing Strategy</div>
-            <div className="header-subtitle">Enterprise Builder Plan · 21 Tactics · 3 Phases</div>
+          <div className="header-subtitle">Enterprise Builder Plan · 23 Tactics · 2 Campaigns · 3 Phases</div>
           </div>
         </div>
         <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />

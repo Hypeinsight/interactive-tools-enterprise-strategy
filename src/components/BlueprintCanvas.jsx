@@ -128,6 +128,71 @@ function Foundation() {
   )
 }
 
+// ── Customer Journey stage mapping ──
+const CJ_STAGES = {
+  22: { stage: 'DISCOVER', track: 'generic',    color: '#FF9500' },
+  23: { stage: 'DISCOVER', track: 'generic',    color: '#FF9500' },
+  4:  { stage: 'IDENTIFY', track: 'enterprise', color: '#0077FF' },
+  9:  { stage: 'OUTREACH', track: 'enterprise', color: '#0077FF' },
+  6:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
+  7:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
+  8:  { stage: 'AWARENESS',track: 'enterprise', color: '#0077FF' },
+  10: { stage: 'TRIAL',    track: 'both',       color: '#FF9500' },
+  11: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
+  12: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
+  13: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
+  14: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
+  15: { stage: 'ENGAGE',   track: 'enterprise', color: '#BFE000' },
+  16: { stage: 'QUALIFY',  track: 'enterprise', color: '#BFE000' },
+  17: { stage: 'QUALIFY',  track: 'enterprise', color: '#BFE000' },
+  18: { stage: 'CLOSE',    track: 'enterprise', color: '#00C2A8' },
+  19: { stage: 'CLOSE',    track: 'enterprise', color: '#00C2A8' },
+  20: { stage: 'BUY / CLOSE', track: 'both',   color: '#00C2A8' },
+  21: { stage: 'MEASURE',  track: 'both',       color: '#00C2A8' },
+}
+
+function CJBadge({ x, y, stage, color }) {
+  const bw = stage.length * 4.8 + 14
+  const bh = 11
+  const byc = y - 29
+  return (
+    <g style={{ pointerEvents: 'none' }}>
+      <rect x={x - bw / 2} y={byc - bh / 2} width={bw} height={bh} rx={bh / 2}
+        fill={color} fillOpacity={0.15}
+        stroke={color} strokeWidth={0.7} strokeOpacity={0.6} />
+      <text x={x} y={byc + 3.8} textAnchor="middle"
+        fill={color} fillOpacity={0.9} fontSize={5}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.07em">
+        {stage}
+      </text>
+    </g>
+  )
+}
+
+function CJLegend() {
+  const y = 1232
+  return (
+    <g>
+      <rect x={82} y={y} width={530} height={50} rx={3}
+        fill="rgba(26,31,46,0.92)" stroke="rgba(0,194,168,0.22)" strokeWidth={0.6} />
+      <text x={92} y={y + 11} fill="#00C2A8" fillOpacity={0.75} fontSize={6.5}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.12em">
+        CUSTOMER JOURNEY COMPARISON
+      </text>
+      <circle cx={92} cy={y + 24} r={3} fill="#FF9500" />
+      <text x={100} y={y + 27.5} fill="#FF9500" fillOpacity={0.85} fontSize={6}
+        fontFamily="'Inter',sans-serif" fontWeight={700}>
+        GENERIC: Discover (Meta/Google Ads) → Trial → Subscribe PRO ($287/yr, target: 10.45/day) → Expand to Enterprise
+      </text>
+      <circle cx={92} cy={y + 39} r={3} fill="#0077FF" />
+      <text x={100} y={y + 42.5} fill="#0077FF" fillOpacity={0.85} fontSize={6}
+        fontFamily="'Inter',sans-serif" fontWeight={700}>
+        ENTERPRISE ABM: Identify → Outreach → Engage → Qualify (MQL→SQL) → Propose → Close
+      </text>
+    </g>
+  )
+}
+
 // ── Kate Mode: badge on hotspots with strategic notes ──
 function KateBadge({ x, y, badge, color }) {
   const byc = y + 43
@@ -346,15 +411,44 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <TitleBlock />
       <Compass />
 
-      {tactics.map(tactic => (
-        <Hotspot
-          key={tactic.id}
-          tactic={tactic}
-          isVisible={activeFilter === 'all' || activeFilter === tactic.phase}
-          isSelected={selectedTactic?.id === tactic.id}
-          onClick={onSelectTactic}
-        />
-      ))}
+      {tactics.map(tactic => {
+        const isVisible =
+          activeFilter === 'all' ||
+          activeFilter === tactic.phase ||
+          (activeFilter === 'generic' && (tactic.campaignType === 'generic' || tactic.campaignType === 'both'))
+        return (
+          <Hotspot
+            key={tactic.id}
+            tactic={tactic}
+            isVisible={isVisible}
+            isSelected={selectedTactic?.id === tactic.id}
+            onClick={onSelectTactic}
+          />
+        )
+      })}
+
+      {/* Customer Journey Overlay — always visible */}
+      <g className="cj-canvas-overlay">
+        {tactics.map(tactic => {
+          const cj = CJ_STAGES[tactic.id]
+          if (!cj) return null
+          const isVisible =
+            activeFilter === 'all' ||
+            activeFilter === tactic.phase ||
+            (activeFilter === 'generic' && (tactic.campaignType === 'generic' || tactic.campaignType === 'both'))
+          if (!isVisible) return null
+          return (
+            <CJBadge
+              key={`cj-${tactic.id}`}
+              x={tactic.x}
+              y={tactic.y}
+              stage={cj.stage}
+              color={cj.color}
+            />
+          )
+        })}
+        <CJLegend />
+      </g>
 
       {/* Kate Strategy Overlay */}
       {kateMode && (

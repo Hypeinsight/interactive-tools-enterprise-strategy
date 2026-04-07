@@ -136,6 +136,12 @@ html, body, #root {
   box-shadow: 0 2px 12px rgba(0, 194, 168, 0.3);
 }
 
+.filter-pill.active[data-phase="generic"] {
+  background: #FF9500;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(255, 149, 0, 0.35);
+}
+
 /* ─── Zoom Controls ─── */
 .zoom-controls {
   position: fixed;
@@ -187,6 +193,16 @@ html, body, #root {
 .hotspot-group.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Generic campaign tactics — orange glow treatment */
+.hotspot-group.generic .hotspot-pulse {
+  animation: pulse-generic 2s ease-in-out infinite;
+}
+
+@keyframes pulse-generic {
+  0%, 100% { opacity: 0.35; r: 18; }
+  50% { opacity: 0; r: 26; }
 }
 
 /* Deferred tactics — greyed out, pulse suppressed, dashed ring */
