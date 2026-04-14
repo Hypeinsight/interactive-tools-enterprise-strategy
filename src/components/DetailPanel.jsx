@@ -69,10 +69,29 @@ function EmailSequencePreview({ preview }) {
   )
 }
 
+function ImageLightbox({ src, caption, onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div className="lightbox-overlay" onClick={onClose}>
+      <button className="lightbox-close" onClick={onClose} aria-label="Close">&#x2715;</button>
+      <div className="lightbox-inner" onClick={e => e.stopPropagation()}>
+        <img src={src} alt={caption} className="lightbox-img" />
+        {caption && <p className="lightbox-caption">{caption}</p>}
+      </div>
+    </div>
+  )
+}
+
 export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
   const isOpen = tactic !== null
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(null)
+  const [lightbox, setLightbox] = useState(null)
 
   // Reset edit state when tactic changes
   useEffect(() => {
@@ -132,6 +151,8 @@ export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
   }
 
   return (
+    <>
+    {lightbox && <ImageLightbox src={lightbox.src} caption={lightbox.caption} onClose={() => setLightbox(null)} />}
     <div className={`detail-overlay${isOpen ? ' open' : ''}`}>
       <div className="detail-backdrop" onClick={onClose} />
       <div className="detail-panel">
@@ -277,20 +298,20 @@ export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
                   return (
                     <div className="preview-image-block">
                       <div className="detail-section-title" style={{ marginTop: '1.25rem' }}>Ad Creative</div>
-                      <a
-                        href={preview.image}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <div
                         className="preview-image-link"
-                        title="Click to view full size"
+                        onClick={() => setLightbox({ src: preview.image, caption: preview.caption })}
+                        role="button"
+                        tabIndex={0}
+                        title="Click to enlarge"
                       >
                         <img
                           src={preview.image}
                           alt={preview.caption}
                           className="preview-ad-image"
                         />
-                        <span className="preview-image-hint">View full size ↗</span>
-                      </a>
+                        <span className="preview-image-hint">Click to enlarge</span>
+                      </div>
                       {preview.caption && (
                         <p className="preview-caption">{preview.caption}</p>
                       )}
@@ -345,5 +366,6 @@ export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
         )}
       </div>
     </div>
+    </>  
   )
 }
