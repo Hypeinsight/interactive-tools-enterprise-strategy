@@ -15,7 +15,8 @@ const H = {
   // WHALE LEFT (y=940 - lowered to clear header)
   25:{x:100,y:940}, 26:{x:215,y:940}, 27:{x:330,y:940},
   // Engage - WHALE LEFT (y=650)
-  28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650}, 31:{x:460,y:650},
+  28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650},
+  31:{x:460,y:690},  // Whale Events - below Landing Pages
   // Engage - TIER 2 RIGHT (y=715)
   11:{x:530,y:715}, 14:{x:640,y:715}, 12:{x:750,y:715}, 13:{x:840,y:715},
   // Sales (y=545)
@@ -109,7 +110,6 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         <Animated id="t2-lumpy" from={10} to={9} color={B} pc={B} opacity={0.14} />
         <Animated id="t2-cont"  from={10} to={6} color={B} pc={B} opacity={0.13} />
         <Animated id="t2-li"    from={10} to={7} color={B} pc={B} opacity={0.12} />
-        <Solid from={10} to={8} color={GR} opacity={0.35} width={0.7} />
       </>}
 
       {/* WHALE outreach (LEFT) */}
@@ -119,10 +119,10 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         <Animated id="w27" from={10} to={27} color={W} pc={W} opacity={0.16} width={1.1} />
       </>}
 
-      {/* EDM Outreach -> LinkedIn Strategy + Multi-Threaded (greyed) */}
+      {/* EDM Outreach -> LinkedIn Strategy + Multi-Threaded Email in Engage (greyed, external path) */}
       {s3 && <>
-        <Solid from={8} to={12} color={GR} opacity={0.28} width={0.7} />
-        <Solid from={8} to={13} color={GR} opacity={0.28} width={0.7} />
+        <Solid from={8} to={12} color={GR} opacity={0.5} width={1.0} />
+        <Solid from={8} to={13} color={GR} opacity={0.35} width={0.8} />
       </>}
 
       {/* AWARENESS -> ENGAGE */}
@@ -130,9 +130,10 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         <>
           {/* Tier 2: awareness -> Tier 2 engage (RIGHT) */}
           <Animated id="t2-b1"   from={9}  to={11} color={B} pc={L} opacity={0.14} />
-          <Animated id="t2-b2"   from={9}  to={14} color={B} pc={L} opacity={0.16} />
-          <Animated id="t2-c1"   from={6}  to={14} color={B} pc={L} opacity={0.15} />
-          <Animated id="t2-li-e" from={7}  to={11} color={B} pc={L} opacity={0.11} />
+          <Animated id="t2-b2"    from={9} to={14} color={B} pc={L} opacity={0.18} />
+          <Animated id="t2-c1"    from={6} to={14} color={B} pc={L} opacity={0.17} />
+          <Animated id="t2-li-e"  from={7} to={11} color={B} pc={L} opacity={0.15} />
+          <Animated id="t2-li-ev" from={7} to={14} color={B} pc={L} opacity={0.14} />
           <Gateway x={700} y={860} label="QUALIFY" sub="MQL to SQL" color={B} />
 
           {/* Whale: awareness -> Whale engage (LEFT) */}
@@ -148,8 +149,8 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         </>
       ) : (
         <>
-          {[{f:9,t:11},{f:9,t:14},{f:6,t:14},{f:7,t:11},{f:26,t:28},{f:27,t:28},{f:27,t:29},{f:25,t:28},{f:25,t:29},{f:26,t:31},{f:27,t:31}].map(({f,t},i) =>
-            H[f] && H[t] ? <Solid key={i} from={f} to={t} color={GR} opacity={0.22} width={0.7} /> : null
+          {[{f:9,t:11},{f:9,t:14},{f:6,t:14},{f:7,t:11},{f:7,t:14},{f:26,t:28},{f:27,t:28},{f:27,t:29},{f:25,t:28},{f:25,t:29},{f:26,t:31},{f:27,t:31}].map(({f,t},i) =>
+            H[f] && H[t] ? <Solid key={i} from={f} to={t} color={GR} opacity={0.35} width={0.8} /> : null
           )}
         </>
       )}

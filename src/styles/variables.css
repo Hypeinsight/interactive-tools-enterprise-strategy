@@ -41,8 +41,8 @@
   --chrome-text: #1a2744;
   --chrome-text-dim: #6B7A99;
   --chrome-hover: rgba(0, 0, 0, 0.05);
-  --header-grad-from: rgba(240, 244, 250, 0.97);
-  --header-grad-to: rgba(240, 244, 250, 0);
+  --header-grad-from: rgba(248, 250, 255, 0.98);
+  --header-grad-to: rgba(248, 250, 255, 0.98); /* solid — no fade so overview panels stay readable */
   --flow-opacity-boost: 2.5;
 
   /* Phase colours */
