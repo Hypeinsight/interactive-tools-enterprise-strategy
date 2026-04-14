@@ -8,30 +8,40 @@ const PHASE_COLORS = {
 const GENERIC_COLOR = '#FF9500'
 const LIVE_COLOR = '#22C55E'
 const LOCKED_COLOR = 'rgba(120,130,150,0.55)'
+const WHALE_COLOR = '#E53935'
+const FADED_COLOR = 'rgba(140,150,165,0.55)'
 
-export default function Hotspot({ tactic, isVisible, isSelected, onClick, isLocked }) {
+export default function Hotspot({ tactic, isVisible, isSelected, onClick, isLocked, isGenericFaded }) {
   const isGeneric = tactic.campaignType === 'generic'
   const isLive = tactic.isLive === true
+  const isWhale = tactic.whale === true
   const isDeferred = tactic.status === 'deferred'
+  const isLowPriority = tactic.lowPriority === true
+  const isAI = tactic.isAI === true
 
   const color = isLocked
     ? LOCKED_COLOR
+    : (isLive && isGenericFaded)
+    ? FADED_COLOR
+    : isWhale
+    ? WHALE_COLOR
     : isLive
     ? LIVE_COLOR
     : isGeneric
     ? GENERIC_COLOR
-    : (PHASE_COLORS[tactic.phase] || '#0077FF')
+    : (PHASE_COLORS[tactic.phase] || '#1482FF')
 
-  const isPhase1 = tactic.execPhase === 1 && !isDeferred && !isLocked && !isLive
+  const isPhase1 = tactic.execPhase === 1 && !isDeferred && !isLocked && !isLive && !isWhale
 
   const className = [
     'hotspot-group',
     isVisible ? '' : 'hidden',
     isSelected ? 'selected' : '',
-    isDeferred ? 'deferred' : '',
+    isDeferred || isLowPriority ? 'deferred' : '',
     isGeneric && !isLive ? 'generic' : '',
     isLocked ? 'locked' : '',
-    isLive ? 'live' : '',
+    isLive && !isGenericFaded ? 'live' : '',
+    isWhale ? 'whale-tactic' : '',
   ].filter(Boolean).join(' ')
 
   return (
@@ -70,8 +80,7 @@ export default function Hotspot({ tactic, isVisible, isSelected, onClick, isLock
         </>
       )}
 
-      {/* LIVE badge (replaces GENERIC badge for live tactics) */}
-      {isLive && !isLocked && (
+      {isLive && !isLocked && !isGenericFaded && (
         <>
           <rect x={tactic.x - 13} y={tactic.y - 22} width={26} height={9} rx={4.5}
             fill={LIVE_COLOR} fillOpacity={0.18} stroke={LIVE_COLOR} strokeWidth={0.7} strokeOpacity={0.75}

@@ -501,6 +501,30 @@ html, body, #root {
   50% { opacity: 0; r: 26; }
 }
 
+/* Whale tactics — red glow pulse */
+.hotspot-group.whale-tactic .hotspot-pulse {
+  animation: pulse-whale 2s ease-in-out infinite;
+}
+
+@keyframes pulse-whale {
+  0%, 100% { opacity: 0.35; r: 18; }
+  50%       { opacity: 0.04; r: 26; }
+}
+
+/* Low-priority tactics — same dimmed treatment as deferred */
+.hotspot-group.low-priority {
+  opacity: 0.28;
+  filter: grayscale(0.6);
+  cursor: default;
+}
+.hotspot-group.low-priority .hotspot-pulse {
+  animation: none;
+  opacity: 0;
+}
+.hotspot-group.low-priority .hotspot-dot {
+  stroke-dasharray: 4 2;
+}
+
 /* Locked phase tactics — fully dimmed, no interaction */
 .hotspot-group.locked {
   opacity: 0.38;
@@ -804,6 +828,56 @@ html, body, #root {
   height: 6px;
   border-radius: 50%;
   background: var(--blue);
+}
+
+/* ─── Document List Preview ─── */
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid var(--lgrey);
+  border-radius: 10px;
+  text-decoration: none;
+  background: #fafafa;
+  transition: all 0.15s ease;
+}
+
+.doc-item:hover {
+  border-color: var(--blue);
+  background: #f0f5ff;
+}
+
+.doc-icon {
+  font-family: var(--f);
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  background: #E53935;
+  color: #fff;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.doc-label {
+  font-family: var(--f-body);
+  font-size: 0.85rem;
+  color: var(--dark);
+  flex: 1;
+}
+
+.doc-arrow {
+  font-size: 0.9rem;
+  color: var(--blue);
+  flex-shrink: 0;
 }
 
 /* ─── Ad Image Preview ─── */

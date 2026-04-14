@@ -10,18 +10,17 @@ import { loadRemoteEdits, saveRemoteEdits } from './utils/remoteStorage'
 
 const STORAGE_KEY = 'tools-strategy-map-edits'
 
-const MAX_STEP = 10
+const MAX_STEP = 9
 const STEP_LABELS = [
-  '▶ Research & Planning',       // step 0 → 1: tactics 1,2,3
-  '▶ Data Sources',               // step 1 → 2: tactics 4,5
-  '▶ Live Campaigns',             // step 2 → 3: tactics 22,23
-  '▶ Outreach Tactics',           // step 3 → 4: tactics 9,6,7,8
-  '▶ Activate Phase 2: Engage',  // step 4 → 5: unlocks Phase 2
-  '▶ Multi-Channel Engagement',  // step 5 → 6: tactics 14,12,13
-  '▶ Sales Enablement',          // step 6 → 7: tactics 15,17,16
-  '▶ Activate Phase 3: Convert', // step 7 → 8: unlocks Phase 3
-  '▶ Propose & Close',           // step 8 → 9: tactic 19
-  '▶ Conversion & Metrics',      // step 9 → 10: tactics 20,21
+  '▶ Research & Planning',          // 0→1: ICP, Buying Committee, Intelligence, Leadfeeder
+  '▶ Data Sources & Pipeline',      // 1→2: Known Contacts, External Enrichment, PLG
+  '▶ Outreach Tactics',             // 2→3: Tier 2 outreach + Whale branch
+  '▶ Activate Phase 2: Engage',    // 3→4: unlocks Engage, Personalised Video, Events
+  '▶ Sales Enablement',            // 4→5: Sales Discovery, Leverage Strengths, Landing Pages
+  '▶ Activate Phase 3: Convert',   // 5→6: unlocks Convert, Deal Acceleration
+  '▶ Propose & Close',             // 6→7: Propose & Close
+  '▶ Conversion & Metrics',        // 7→8: Conversion Outcomes, ABM KPIs
+  '▶ View Full Strategy',          // 8→9: complete
 ]
 
 function applyEdits(edits) {
@@ -49,8 +48,8 @@ export default function App() {
   // Derive which phase floors are visible from presentation progress
   const unlockedPhases = [
     1,
-    ...(presentationStep >= 5 ? [2] : []),
-    ...(presentationStep >= 8 ? [3] : []),
+    ...(presentationStep >= 4 ? [2] : []),  // Engage unlocks at step 4
+    ...(presentationStep >= 6 ? [3] : []),  // Convert unlocks at step 6
   ]
 
   // Load remote edits on mount (overrides local)
@@ -77,8 +76,8 @@ export default function App() {
     // Always use window.innerWidth for consistent centering regardless of call source
     const scale = 1.4
     const posX = Math.max(0, (window.innerWidth - 1000 * scale) / 2)
-    // Show Awareness (Ground Floor) at top of viewport
-    r.setTransform(posX, -1350, scale, 300)
+    // Show Awareness (Ground Floor, now h=500) at top of viewport
+    r.setTransform(posX, -1956, scale, 300)
   }, [])
 
   // ‘Restart’ goes back to the ICP intro; TransformWrapper onInit handles re-centering when it remounts

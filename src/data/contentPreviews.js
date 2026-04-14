@@ -6,6 +6,72 @@
 
 export const TACTIC_PREVIEWS = {
 
+  // ── Tier 2 LinkedIn Ads (id 7) ─────────────────────────────────────────────────────
+  7: {
+    type: 'image',
+    image: '/assets/flyer-ncc-graphic.jpg',
+    caption: 'NCC compliance ad creative used in Tier 2 LinkedIn targeting.',
+  },
+
+  // ── Leadfeeder (id 24) ──────────────────────────────────────────────────────
+  24: {
+    type: 'image',
+    image: '/assets/leadfeeder.png',
+    caption: 'Leadfeeder dashboard showing enterprise accounts visiting buildingtools.co.',
+  },
+
+  // ── Whale LinkedIn Ads (id 25) ─────────────────────────────────────────────
+  25: {
+    type: 'image-gallery',
+    label: 'LinkedIn Ad Creatives: Tier 1 Whale Campaign',
+    images: [
+      { src: '/assets/linkedin-ad-banner.png', caption: 'Banner - Brand awareness ad for Tier 1 builders' },
+      { src: '/assets/linkedin-ad-cio.png',    caption: 'CIO persona ad - technology risk and enterprise security' },
+      { src: '/assets/linkedin-ad-cpo.png',    caption: 'CPO persona ad - procurement ROI and compliance cost' },
+      { src: '/assets/linkedin-ad-hse.png',    caption: 'HSE Director persona ad - site safety and NCC obligations' },
+      { src: '/assets/linkedin-ad-stat.png',   caption: 'Stats-led creative - defect cost and compliance savings' },
+    ],
+  },
+
+  // ── Whale Direct Mail (id 26) ─────────────────────────────────────────────
+  26: {
+    type: 'document-list',
+    label: 'Direct Mail Assets: Tier 1 Whale Pack',
+    documents: [
+      { href: '/assets/Tools_Hickory_EnterpriseBrochure.pdf', label: 'Hickory Enterprise Brochure', icon: 'pdf' },
+      { href: '/assets/Tools_Hickory_FounderNote.pdf',        label: 'Founder Note (Personalised)', icon: 'pdf' },
+    ],
+  },
+
+  // ── Whale Content & EDM (id 27) ────────────────────────────────────────────
+  27: {
+    type: 'document-list',
+    label: 'Whale Content Assets: Hickory Examples',
+    documents: [
+      { href: '/assets/Tools_Hickory_Flyer_v2.pdf',    label: 'Hickory Account Flyer v2', icon: 'pdf' },
+      { href: '/assets/Tools_Hickory_WhitePaper.pdf',  label: 'Hickory Compliance Whitepaper', icon: 'pdf' },
+    ],
+  },
+
+  // ── Whale Personalised Videos (id 28) ─────────────────────────────────────
+  28: {
+    type: 'document-list',
+    label: 'Video Script: Hickory Personalised Video',
+    documents: [
+      { href: '/assets/hickory_video_script.pdf', label: 'Hickory Video Script (60 sec)', icon: 'pdf' },
+    ],
+  },
+
+  // ── Whale LinkedIn Playbook (id 29) ──────────────────────────────────────
+  29: {
+    type: 'document-list',
+    label: 'LinkedIn ABM Playbook: Hickory',
+    documents: [
+      { href: '/assets/LinkedIn_ABM_Playbook_Tools_Hickory.pdf', label: 'LinkedIn ABM Playbook - Tools x Hickory', icon: 'pdf' },
+      { href: '/assets/hickory_inmails.pdf',                     label: 'Hickory InMail Templates', icon: 'pdf' },
+    ],
+  },
+
   // ── Meta Ads (id 22) ──────────────────────────────────────────────
   22: {
     type: 'image',

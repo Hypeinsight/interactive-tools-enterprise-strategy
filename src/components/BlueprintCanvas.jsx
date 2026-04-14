@@ -4,7 +4,7 @@ import FlowPaths from './FlowPaths'
 import { KATE_TACTIC_OVERRIDES, KATE_FLOOR_OVERRIDES } from '../data/kateStrategy'
 
 const SVG_WIDTH = 1000
-const SVG_HEIGHT = 1500
+const SVG_HEIGHT = 1700
 
 const PHASE_DISPLAY_NAMES = {
   awareness: 'AWARENESS',
@@ -14,7 +14,7 @@ const PHASE_DISPLAY_NAMES = {
 
 // ── Floor definitions
 const FLOORS = {
-  awareness: { y: 880, h: 340, label: 'GROUND FLOOR', phase: 'Phase 1: Awareness', sub: 'Foundation & Groundwork · 9 Tactics', color: '#1482FF' },
+  awareness: { y: 880, h: 500, label: 'GROUND FLOOR', phase: 'Phase 1: Awareness', sub: 'Foundation & Groundwork · Tier 1 Whales + Tier 2 · 15 Tactics', color: '#1482FF' },
   engage:    { y: 480, h: 340, label: 'FIRST FLOOR',  phase: 'Phase 2: Engage',    sub: 'Framing & Structure · 8 Tactics',    color: '#BFE000' },
   convert:   { y: 100, h: 320, label: 'PENTHOUSE',    phase: 'Phase 3: Convert',    sub: 'Fit-out & Completion · 4 Tactics',   color: '#00C2A8' },
 }
@@ -595,7 +595,7 @@ function Compass() {
 }
 
 // ═══════════════════════
-export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic, kateMode, unlockedPhases = [1, 2, 3], presentationStep = 999 }) {
+export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic, kateMode, unlockedPhases = [1, 2, 3], presentationStep = 999, onResetPhases }) {
   const ph2Locked = !unlockedPhases.includes(2)
   const ph3Locked = !unlockedPhases.includes(3)
   return (
@@ -633,7 +633,7 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <text x={786} y={1210} textAnchor="middle"
         fill="#FF9500" fillOpacity={0.09} fontSize={13}
         fontFamily="'Inter',sans-serif" fontWeight={900} letterSpacing="0.12em">GENERIC</text>
-      <FlowPaths unlockedPhases={unlockedPhases} />
+      <FlowPaths unlockedPhases={unlockedPhases} presentationStep={presentationStep} />
       <TitleBlock />
       <Compass />
 
@@ -641,9 +641,11 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
         const isLocked =
           (tactic.phase === 'engage' && ph2Locked) ||
           (tactic.phase === 'convert' && ph3Locked)
-        // Hide tactics whose step hasn’t been reached yet in the presentation
-        const stepHidden = !isLocked && presentationStep < (tactic.presentationStep || 1)
+        // Hide tactics whose step hasn't been reached yet
+        const stepHidden = !isLocked && presentationStep < (tactic.presentationStep ?? 1)
         if (stepHidden) return null
+        // Live generic tactics (isLive) fade to grey after step 0
+        const isGenericFaded = tactic.isLive === true && presentationStep >= 1
         const isVisible =
           activeFilter === 'all' ||
           activeFilter === tactic.phase ||
@@ -656,6 +658,7 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
             isSelected={selectedTactic?.id === tactic.id}
             onClick={isLocked ? () => {} : onSelectTactic}
             isLocked={isLocked}
+            isGenericFaded={isGenericFaded}
           />
         )
       })}

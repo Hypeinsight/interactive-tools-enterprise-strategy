@@ -2,6 +2,50 @@ import React, { useState, useEffect } from 'react'
 import { KATE_TACTIC_OVERRIDES } from '../data/kateStrategy'
 import { TACTIC_PREVIEWS } from '../data/contentPreviews'
 
+function ImageGalleryPreview({ preview, setLightbox }) {
+  const [idx, setIdx] = useState(0)
+  const img = preview.images[idx]
+  return (
+    <div className="email-preview-block">
+      <div className="detail-section-title" style={{ marginTop: '1.25rem' }}>{preview.label}</div>
+      <div className="email-tabs">
+        {preview.images.map((im, i) => (
+          <button key={i} className={`email-tab${i === idx ? ' active' : ''}`}
+            onClick={() => setIdx(i)}>{`Ad ${i + 1}`}</button>
+        ))}
+      </div>
+      <div className="preview-image-link" onClick={() => setLightbox({ src: img.src, caption: img.caption })}
+        role="button" tabIndex={0} title="Click to enlarge">
+        <img src={img.src} alt={img.caption} className="preview-ad-image" />
+        <span className="preview-image-hint">Click to enlarge</span>
+      </div>
+      {img.caption && <p className="preview-caption">{img.caption}</p>}
+      <div className="email-nav">
+        <button className="email-nav-btn" onClick={() => setIdx(i => Math.max(0, i - 1))} disabled={idx === 0}>Previous</button>
+        <span className="email-nav-count">{idx + 1} of {preview.images.length}</span>
+        <button className="email-nav-btn" onClick={() => setIdx(i => Math.min(preview.images.length - 1, i + 1))} disabled={idx === preview.images.length - 1}>Next</button>
+      </div>
+    </div>
+  )
+}
+
+function DocumentListPreview({ preview }) {
+  return (
+    <div className="email-preview-block">
+      <div className="detail-section-title" style={{ marginTop: '1.25rem' }}>{preview.label}</div>
+      <div className="doc-list">
+        {preview.documents.map((doc, i) => (
+          <a key={i} href={doc.href} target="_blank" rel="noopener noreferrer" className="doc-item">
+            <span className="doc-icon">PDF</span>
+            <span className="doc-label">{doc.label}</span>
+            <span className="doc-arrow">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function EmailSequencePreview({ preview }) {
   const [activeIdx, setActiveIdx] = useState(0)
   const email = preview.emails[activeIdx]
@@ -317,6 +361,14 @@ export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
                       )}
                     </div>
                   )
+                }
+
+                if (preview.type === 'image-gallery') {
+                  return <ImageGalleryPreview preview={preview} setLightbox={setLightbox} />
+                }
+
+                if (preview.type === 'document-list') {
+                  return <DocumentListPreview preview={preview} />
                 }
 
                 if (preview.type === 'email-sequence') {
