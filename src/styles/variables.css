@@ -1,7 +1,7 @@
 :root {
-  --blue: #0077FF;
+  --blue: #1482FF;
   --blue2: #1482FF;
-  --blue3: #0074FD;
+  --blue3: #1482FF;
   --lime: #BFE000;
   --dark: #00182E;
   --navy: #12203E;
@@ -13,6 +13,7 @@
   --text: #1a2744;
   --card-shadow: 0 2px 24px rgba(0, 119, 255, 0.07);
   --f: 'Inter', sans-serif;
+  --f-body: 'Roboto', sans-serif;
 
   /* Blueprint — dark (default) */
   --bp-bg: #1a1f2e;
@@ -31,7 +32,7 @@
 }
 
 [data-theme="light"] {
-  --bp-bg: #F0F4FA;
+  --bp-bg: #FFFFFF;
   --bp-grid: rgba(0, 119, 255, 0.08);
   --bp-line: rgba(0, 119, 255, 0.3);
   --bp-text: rgba(0, 119, 255, 0.45);
@@ -45,7 +46,7 @@
   --flow-opacity-boost: 2.5;
 
   /* Phase colours */
-  --phase-awareness: #0077FF;
+  --phase-awareness: #1482FF;
   --phase-engage: #BFE000;
   --phase-convert: #00C2A8;
 }

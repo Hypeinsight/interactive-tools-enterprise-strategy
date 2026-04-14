@@ -4,7 +4,7 @@ const H = {
   1:{x:200,y:1160}, 2:{x:420,y:1160}, 3:{x:640,y:1160},
   4:{x:220,y:1060},  5:{x:620,y:1060},
   22:{x:700,y:1060}, 23:{x:820,y:1060},
-  6:{x:380,y:930},   7:{x:550,y:930},  8:{x:740,y:930},  9:{x:180,y:930},
+  6:{x:380,y:930},   7:{x:550,y:930},  8:{x:640,y:930},  9:{x:180,y:960},
   10:{x:160,y:715}, 11:{x:310,y:715}, 12:{x:570,y:715}, 13:{x:700,y:715},
   14:{x:450,y:715}, 15:{x:840,y:715}, 16:{x:680,y:545}, 17:{x:420,y:545},
   18:{x:300,y:330}, 19:{x:300,y:180}, 20:{x:550,y:180}, 21:{x:750,y:180},
@@ -77,12 +77,16 @@ function Gateway({ x, y, label, sub, color }) {
   )
 }
 
-const B='#0077FF', L='#BFE000', T='#00C2A8', G='#FF9500'
+const B = '#1482FF', L = '#BFE000', T = '#00C2A8', G = '#22C55E'
+const GR = 'rgba(110,120,140,0.45)' // grey for locked paths
 
-export default function FlowPaths() {
+export default function FlowPaths({ unlockedPhases = [1, 2, 3] }) {
+  const ph2 = unlockedPhases.includes(2)
+  const ph3 = unlockedPhases.includes(3)
+
   return (
     <g className="flow-paths">
-      {/* AWARENESS within-phase */}
+      {/* ── PHASE 1: AWARENESS within-phase (always active) ── */}
       <Solid from={1} to={2} color={B} opacity={0.18} width={1.2} />
       <Solid from={2} to={3} color={B} opacity={0.18} width={1.2} />
       <Solid from={3} to={4} color={B} opacity={0.13} />
@@ -92,42 +96,81 @@ export default function FlowPaths() {
       <Solid from={5} to={7} color={B} opacity={0.1} />
       <Solid from={5} to={8} color={B} opacity={0.1} />
 
-      {/* GENERIC CAMPAIGN — Meta + Google → PRO Conversion (self-serve) */}
-      <Animated id="g1" from={22} to={20} color={G} pc={G} opacity={0.18} width={1.2} />
-      <Animated id="g2" from={23} to={20} color={G} pc={G} opacity={0.18} width={1.2} />
-      <Label x={620} y={1020} text="GENERIC CAMPAIGN" color={G} />
+      {/* ── GENERIC CAMPAIGN — always animated (Meta + Google are LIVE) ── */}
+      <Animated id="g1" from={22} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
+      <Animated id="g2" from={23} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
+      <Label x={620} y={1020} text="GENERIC CAMPAIGN • LIVE" color={G} />
 
-      {/* AWARENESS → ENGAGE cross-phase */}
-      <Animated id="a" from={4} to={10} color={B} pc={L} opacity={0.15} />
-      <Animated id="b1" from={9} to={11} color={B} pc={L} opacity={0.14} />
-      <Animated id="b2" from={9} to={14} color={B} pc={L} opacity={0.14} />
-      <Animated id="c1" from={6} to={12} color={B} pc={L} opacity={0.12} />
-      <Animated id="c2" from={7} to={12} color={B} pc={L} opacity={0.12} />
-      <Animated id="d1" from={8} to={13} color={B} pc={L} opacity={0.12} />
-      <Animated id="d2" from={8} to={15} color={B} pc={L} opacity={0.12} />
+      {/* ── AWARENESS → ENGAGE cross-phase ── */}
+      {ph2 ? (
+        <>
+          <Animated id="a" from={4} to={10} color={B} pc={L} opacity={0.15} />
+          <Animated id="b1" from={9} to={11} color={B} pc={L} opacity={0.14} />
+          <Animated id="b2" from={9} to={14} color={B} pc={L} opacity={0.14} />
+          <Animated id="c1" from={6} to={12} color={B} pc={L} opacity={0.12} />
+          <Animated id="c2" from={7} to={12} color={B} pc={L} opacity={0.12} />
+          <Animated id="d1" from={8} to={13} color={B} pc={L} opacity={0.12} />
+          <Animated id="d2" from={8} to={15} color={B} pc={L} opacity={0.12} />
+          <Label x={170} y={843} text="A: PLG ROUTE" color={B} />
+          <Label x={340} y={843} text="B: EXEC ROUTE" color={B} />
+          <Label x={550} y={843} text="C: DIGITAL ROUTE" color={B} />
+          <Label x={750} y={843} text="D: DIRECT ROUTE" color={B} />
+          <Gateway x={470} y={865} label="QUALIFY" sub="MQL → SQL" color={B} />
+        </>
+      ) : (
+        <>
+          <Solid from={4} to={10} color={GR} opacity={0.6} width={0.7} />
+          <Solid from={9} to={11} color={GR} opacity={0.5} width={0.7} />
+          <Solid from={9} to={14} color={GR} opacity={0.5} width={0.7} />
+          <Solid from={6} to={12} color={GR} opacity={0.4} width={0.7} />
+          <Solid from={7} to={12} color={GR} opacity={0.4} width={0.7} />
+          <Solid from={8} to={13} color={GR} opacity={0.4} width={0.7} />
+          <Solid from={8} to={15} color={GR} opacity={0.4} width={0.7} />
+        </>
+      )}
 
-      <Label x={170} y={843} text="A: PLG ROUTE" color={B} />
-      <Label x={340} y={843} text="B: EXEC ROUTE" color={B} />
-      <Label x={550} y={843} text="C: DIGITAL ROUTE" color={B} />
-      <Label x={750} y={843} text="D: DIRECT ROUTE" color={B} />
-      <Gateway x={470} y={865} label="QUALIFY" sub="MQL → SQL" color={B} />
+      {/* ── ENGAGE within-phase ── */}
+      {ph2 ? (
+        <>
+          {[10, 11, 12, 13, 14, 15].map(id => (
+            <Solid key={`e${id}`} from={id} to={17} color={L} opacity={0.09} />
+          ))}
+          <Dashed from={16} to={12} color={L} />
+          <Dashed from={16} to={13} color={L} />
+          <Dashed from={16} to={17} color={L} />
+        </>
+      ) : (
+        <>
+          {[10, 11, 12, 13, 14, 15, 16].map(id => (
+            <Solid key={`elocked${id}`} from={id} to={17} color={GR} opacity={0.3} width={0.7} />
+          ))}
+        </>
+      )}
 
-      {/* ENGAGE within-phase */}
-      {[10,11,12,13,14,15].map(id => (
-        <Solid key={`e${id}`} from={id} to={17} color={L} opacity={0.09} />
-      ))}
-      <Dashed from={16} to={12} color={L} />
-      <Dashed from={16} to={13} color={L} />
-      <Dashed from={16} to={17} color={L} />
+      {/* ── ENGAGE → CONVERT ── */}
+      {ph3 ? (
+        <>
+          <Animated id="deal" from={17} to={18} color={L} pc={T} opacity={0.2} width={1.5} n={3} />
+          <Gateway x={360} y={450} label="PROPOSE" sub="SQL → Opportunity" color={L} />
+        </>
+      ) : (
+        <Solid from={17} to={18} color={GR} opacity={0.4} width={0.7} />
+      )}
 
-      {/* ENGAGE → CONVERT */}
-      <Animated id="deal" from={17} to={18} color={L} pc={T} opacity={0.2} width={1.5} n={3} />
-      <Gateway x={360} y={450} label="PROPOSE" sub="SQL → Opportunity" color={L} />
-
-      {/* CONVERT within-phase */}
-      <Solid from={18} to={19} color={T} opacity={0.2} width={1.2} />
-      <Solid from={19} to={20} color={T} opacity={0.2} width={1.2} />
-      <Solid from={20} to={21} color={T} opacity={0.15} />
+      {/* ── CONVERT within-phase ── */}
+      {ph3 ? (
+        <>
+          <Solid from={18} to={19} color={T} opacity={0.2} width={1.2} />
+          <Solid from={19} to={20} color={T} opacity={0.2} width={1.2} />
+          <Solid from={20} to={21} color={T} opacity={0.15} />
+        </>
+      ) : (
+        <>
+          <Solid from={18} to={19} color={GR} opacity={0.3} width={0.7} />
+          <Solid from={19} to={20} color={GR} opacity={0.3} width={0.7} />
+          <Solid from={20} to={21} color={GR} opacity={0.25} width={0.7} />
+        </>
+      )}
     </g>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import BlueprintCanvas from './components/BlueprintCanvas'
+import IntroScreen from './components/IntroScreen'
 import DetailPanel from './components/DetailPanel'
 import FilterBar from './components/FilterBar'
 import ZoomControls from './components/ZoomControls'
@@ -8,6 +9,20 @@ import baseTactics from './data/tactics.json'
 import { loadRemoteEdits, saveRemoteEdits } from './utils/remoteStorage'
 
 const STORAGE_KEY = 'tools-strategy-map-edits'
+
+const MAX_STEP = 10
+const STEP_LABELS = [
+  '▶ Research & Planning',       // step 0 → 1: tactics 1,2,3
+  '▶ Data Sources',               // step 1 → 2: tactics 4,5
+  '▶ Live Campaigns',             // step 2 → 3: tactics 22,23
+  '▶ Outreach Tactics',           // step 3 → 4: tactics 9,6,7,8
+  '▶ Activate Phase 2: Engage',  // step 4 → 5: unlocks Phase 2
+  '▶ Multi-Channel Engagement',  // step 5 → 6: tactics 14,12,13
+  '▶ Sales Enablement',          // step 6 → 7: tactics 15,17,16
+  '▶ Activate Phase 3: Convert', // step 7 → 8: unlocks Phase 3
+  '▶ Propose & Close',           // step 8 → 9: tactic 19
+  '▶ Conversion & Metrics',      // step 9 → 10: tactics 20,21
+]
 
 function applyEdits(edits) {
   return baseTactics.map(t => ({ ...t, ...(edits[t.id] || {}) }))
@@ -25,9 +40,18 @@ export default function App() {
   const [tacticsData, setTacticsData] = useState(loadLocalTactics)
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedTactic, setSelectedTactic] = useState(null)
-  const [theme, setTheme] = useState('dark')
-  const [kateMode, setKateMode] = useState(false)
+  const [theme, setTheme] = useState('light')
+  const [kateMode] = useState(true) // Kate’s strategy always on
+  const [presentationStep, setPresentationStep] = useState(0)
+  const [showIntro, setShowIntro] = useState(true)
   const transformRef = useRef(null)
+
+  // Derive which phase floors are visible from presentation progress
+  const unlockedPhases = [
+    1,
+    ...(presentationStep >= 5 ? [2] : []),
+    ...(presentationStep >= 8 ? [3] : []),
+  ]
 
   // Load remote edits on mount (overrides local)
   useEffect(() => {
@@ -41,6 +65,29 @@ export default function App() {
 
   const toggleTheme = useCallback(() => {
     setTheme(t => t === 'dark' ? 'light' : 'dark')
+  }, [])
+
+  const advance = useCallback(() => {
+    setPresentationStep(prev => Math.min(prev + 1, MAX_STEP))
+  }, [])
+
+  const goToTop = useCallback((ref) => {
+    const r = ref ?? transformRef.current
+    if (!r) return
+    const wrapperWidth = r.instance?.wrapperComponent?.clientWidth ?? window.innerWidth
+    const posX = Math.max(0, (wrapperWidth - 1000 * 1.4) / 2)
+    // Start at Awareness (Ground Floor) — SVG y=1090 maps to screen top at scale 1.4
+    r.setTransform(posX, -1350, 1.4, 0)
+  }, [])
+
+  // ‘Restart’ goes back to the ICP intro; TransformWrapper onInit handles re-centering when it remounts
+  const resetPresentation = useCallback(() => {
+    setPresentationStep(0)
+    setShowIntro(true)
+  }, [])
+
+  const beginStrategy = useCallback(() => {
+    setShowIntro(false)
   }, [])
 
   const handleSelectTactic = useCallback((tactic) => {
@@ -87,14 +134,6 @@ export default function App() {
     transformRef.current?.zoomOut(0.5)
   }, [])
 
-  const goToTop = useCallback((ref) => {
-    const r = ref ?? transformRef.current
-    if (!r) return
-    const wrapperWidth = r.instance?.wrapperComponent?.clientWidth ?? window.innerWidth
-    const posX = Math.max(0, (wrapperWidth - 1000 * 1.4) / 2)
-    r.setTransform(posX, 10, 1.4, 0)
-  }, [])
-
   const handleReset = useCallback(() => {
     goToTop()
   }, [goToTop])
@@ -134,25 +173,21 @@ export default function App() {
 
   return (
     <div className="app" data-theme={theme}>
+      {showIntro ? (
+        <IntroScreen onBegin={beginStrategy} />
+      ) : (
+        <>
       {/* Header with logo and filter */}
       <div className="header-bar">
         <div className="header-logo">
           <img src="/Logo.png" alt="Tools™" style={{ height: '36px', objectFit: 'contain' }} />
           <div>
-            <div className="header-title">Enterprise Marketing Strategy</div>
-          <div className="header-subtitle">Enterprise Builder Plan · 23 Tactics · 2 Campaigns · 3 Phases</div>
+          <div className="header-title">Enterprise Builder Strategy</div>
+          <div className="header-subtitle">Enterprise Builders · 23 Tactics · 2 Campaigns · 3 Phases</div>
           </div>
         </div>
         <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
         <div className="header-right">
-          <button
-            className={`kate-toggle${kateMode ? ' active' : ''}`}
-            onClick={() => setKateMode(k => !k)}
-            title={kateMode ? "Hide Kate's strategy changes" : "Show Kate's strategy changes"}
-          >
-            <span className="kate-toggle-dot" />
-            Kate's Strategy
-          </button>
           <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
@@ -182,6 +217,8 @@ export default function App() {
               selectedTactic={selectedTactic}
               onSelectTactic={handleSelectTactic}
               kateMode={kateMode}
+              unlockedPhases={unlockedPhases}
+              presentationStep={presentationStep}
             />
           </div>
         </TransformComponent>
@@ -200,8 +237,31 @@ export default function App() {
         Scroll to zoom · Drag to pan · Click hotspots for details
       </div>
 
+      {/* Presentation step control */}
+      <div className="presentation-nav">
+        <div className="presentation-progress">
+          {Array.from({ length: MAX_STEP }, (_, i) => (
+            <span
+              key={i}
+              className={`progress-dot${i < presentationStep ? ' done' : i === presentationStep ? ' active' : ''}`}
+            />
+          ))}
+        </div>
+        {presentationStep < MAX_STEP ? (
+          <button className="next-step-btn" onClick={advance}>
+            {STEP_LABELS[presentationStep]}
+          </button>
+        ) : (
+          <button className="next-step-btn reset" onClick={resetPresentation}>
+            ↺ Restart Presentation
+          </button>
+        )}
+      </div>
+
       {/* Detail Side Panel */}
       <DetailPanel tactic={selectedTactic} onClose={handleClosePanel} onUpdate={handleUpdateTactic} kateMode={kateMode} />
+        </>
+      )}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "id":  1,
         "hotspotLabel":  "ICP \u0026 Account Tiering",
@@ -16,7 +16,8 @@
                         "Focus: Enterprise builders only — architecture firms, certifiers, and industry bodies are a separate future strategy"
                     ],
         "x":  200,
-        "y":  1160
+        "y":  1160,
+        "presentationStep":  1
     },
     {
         "id":  2,
@@ -36,7 +37,8 @@
                         "IT/Systems Director (Technical Evaluator): ISO 9001 certified, data sovereignty, Revit integration"
                     ],
         "x":  420,
-        "y":  1160
+        "y":  1160,
+        "presentationStep":  1
     },
     {
         "id":  3,
@@ -55,7 +57,8 @@
                         "Create dossiers with recent news, project wins, and pain point hypotheses"
                     ],
         "x":  640,
-        "y":  1160
+        "y":  1160,
+        "presentationStep":  1
     },
     {
         "id":  4,
@@ -74,7 +77,8 @@
                         "Flag PLG expansion opportunities for Engage phase"
                     ],
         "x":  220,
-        "y":  1060
+        "y":  1060,
+        "presentationStep":  2
     },
     {
         "id":  5,
@@ -94,16 +98,12 @@
                         "Use tools like ZoomInfo, Apollo, or LinkedIn Sales Navigator"
                     ],
         "x":  620,
-        "y":  1060
+        "y":  1060,
+        "presentationStep":  2
     },
     {
         "id":  9,
-        "hotspotLabel":  "Lumpy Mailout",
-        "name":  "High-Value Direct Mail \u0026 Executive Gifting",
-        "phase":  "awareness",
-        "phaseLabel":  "Phase 1: Awareness",
-        "campaignType":  "enterprise",
-        "execPhase":  1,
+        "hotspotLabel":  "Lumpy Mailout", "name":  "High-Value Direct Mail & Executive Gifting", "phase":  "awareness", "phaseLabel":  "Phase 1: Awareness", "campaignType":  "enterprise", "execPhase":  2,
         "description":  "Physical pattern interrupts to command executive attention. In an era of overflowing digital inboxes, direct mail serves as a powerful differentiator that becomes a topic of conversation within the target account.",
         "targetAudience":  "C-Suite at Tier 1 Accounts",
         "details":  [
@@ -114,26 +114,29 @@
                         "Glossy brochures with QR codes (\"10 Enterprise Playbooks\")"
                     ],
         "x":  180,
-        "y":  930
+        "y":  960,
+        "presentationStep":  4
     },
     {
         "id":  6,
-        "hotspotLabel":  "Content Strategy",
-        "name":  "Omni-channel Content Distribution",
+        "hotspotLabel":  "Content & EDM",
+        "name":  "Omni-channel Content & Email Distribution",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
         "campaignType":  "enterprise",
         "execPhase":  1,
-        "description":  "Flooding the market with high-value thought leadership content across multiple channels, focusing on the cost of defects, NCC complexity, and digital compliance transformation.",
-        "targetAudience":  "Entire Construction Industry",
+        "description":  "Flooding the market with high-value thought leadership content AND direct email outreach across multiple channels. Focuses on the cost of defects, NCC complexity, and digital compliance transformation. Content warms the market; direct EDM sequences drive action from known contacts.",
+        "targetAudience":  "Entire Construction Industry + Known Contacts",
         "details":  [
-                        "LinkedIn posts on the company page",
-                        "PR releases and blog republishing",
+                        "Direct EDM sequence to known CRM contacts: 3-part personalised email cadence to enterprise accounts in database",
+                        "LinkedIn posts on the company page — commercial builder pain points, NCC updates, compliance ROI",
+                        "PR releases and blog republishing on buildingtools.co",
                         "Content syndication: whitepapers and case studies through MBA, HIA publications",
-                        "Thought leadership: cost of building defects, NCC update complexities"
+                        "Thought leadership: cost of building defects, NCC update complexities, defect liability"
                     ],
         "x":  380,
-        "y":  930
+        "y":  930,
+        "presentationStep":  4
     },
     {
         "id":  7,
@@ -153,7 +156,8 @@
                         "Scale trigger: once Generic Campaign attribution is confirmed and budget allows, shift to LinkedIn"
                     ],
         "x":  550,
-        "y":  930
+        "y":  930,
+        "presentationStep":  4
     },
     {
         "id":  8,
@@ -171,8 +175,9 @@
                         "Designed for initial awareness — not the full ABM cadence",
                         "Timed to land after content warm-up phase (Week 5+)"
                     ],
-        "x":  740,
-        "y":  930
+        "x":  640,
+        "y":  930,
+        "presentationStep":  4
     },
     {
         "id":  10,
@@ -192,7 +197,8 @@
                         "Upsell path: Free → Individual PRO → Enterprise"
                     ],
         "x":  160,
-        "y":  715
+        "y":  715,
+        "presentationStep":  5
     },
     {
         "id":  11,
@@ -211,7 +217,8 @@
                         "Click-through rates increase by over 150% with embedded video"
                     ],
         "x":  310,
-        "y":  715
+        "y":  715,
+        "presentationStep":  5
     },
     {
         "id":  14,
@@ -233,7 +240,8 @@
                         "Cost lens: no booths — identify target attendees in advance and orchestrate in-person touchpoints"
                     ],
         "x":  450,
-        "y":  715
+        "y":  715,
+        "presentationStep":  6
     },
     {
         "id":  12,
@@ -252,7 +260,8 @@
                         "Layer targeting: C-Suite (ROI), Operations/HSE (compliance), IT/Procurement (security)"
                     ],
         "x":  570,
-        "y":  715
+        "y":  715,
+        "presentationStep":  6
     },
     {
         "id":  13,
@@ -271,7 +280,8 @@
                         "Day 12 (Breakup): Polite withdrawal, leaves door open"
                     ],
         "x":  700,
-        "y":  715
+        "y":  715,
+        "presentationStep":  6
     },
     {
         "id":  15,
@@ -292,7 +302,8 @@
         "exampleUrl":  "https://hickoryabm-shecpq3l.manus.space/",
         "exampleLabel":  "View Example: Hickory ABM Landing Page",
         "x":  840,
-        "y":  715
+        "y":  715,
+        "presentationStep":  7
     },
     {
         "id":  17,
@@ -311,7 +322,8 @@
                         "Leverage visual product demonstrations as the \"aha moment\""
                     ],
         "x":  420,
-        "y":  545
+        "y":  545,
+        "presentationStep":  7
     },
     {
         "id":  16,
@@ -330,7 +342,8 @@
                         "CPD/PointsBuild partnership: enterprise firms mandated to provide CPD, Tools™ solves this"
                     ],
         "x":  680,
-        "y":  545
+        "y":  545,
+        "presentationStep":  7
     },
     {
         "id":  18,
@@ -349,7 +362,8 @@
                         "Facilitate executive alignment: peer-to-peer meetings between leadership teams"
                     ],
         "x":  300,
-        "y":  330
+        "y":  330,
+        "presentationStep":  8
     },
     {
         "id":  19,
@@ -368,7 +382,8 @@
                         "Tier 1 goal: secure pilot programs on major flagship projects"
                     ],
         "x":  300,
-        "y":  180
+        "y":  180,
+        "presentationStep":  9
     },
     {
         "id":  20,
@@ -389,7 +404,8 @@
                         "First 7 days: one team, one tool type, first compliance query answered. First 30 days: first site audit completed digitally"
                     ],
         "x":  550,
-        "y":  180
+        "y":  180,
+        "presentationStep":  10
     },
     {
         "id":  21,
@@ -410,17 +426,19 @@
                         "Revenue \u0026 ROI: Enterprise ARR generated, expansion revenue, overall ABM program ROI"
                     ],
         "x":  750,
-        "y":  180
+        "y":  180,
+        "presentationStep":  10
     },
     {
         "id":  22,
+        "isLive":  true,
         "hotspotLabel":  "Meta Ads",
         "name":  "Meta Ads — Generic Campaign",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
         "campaignType":  "generic",
         "execPhase":  1,
-        "description":  "Broad-reach Facebook and Instagram advertising targeting builders of all sizes across Australia. Unlike the Enterprise ABM plan, the Generic Campaign does not restrict to the top 100 accounts — it casts a wide net to drive trial starts and PRO conversions at scale. Purpose: hit Jerry's revenue target of 10.45 new PRO subscribers per day.",
+        "description":  "Broad-reach Facebook and Instagram advertising targeting builders of all sizes across Australia. Unlike the Enterprise ABM plan, the Generic Campaign does not restrict to the top 100 accounts — it casts a wide net to drive trial starts and PRO conversions at scale. Purpose: hit Jerry\u0027s revenue target of 10.45 new PRO subscribers per day.",
         "targetAudience":  "All Australian Builders — Small, Medium \u0026 Large",
         "details":  [
                         "Target: 10.45 new PRO conversions/day ($3K/day annualised at $287/year)",
@@ -429,13 +447,15 @@
                         "CPA PRO conversion: TBD — awaiting attribution fix (dev priority, Buck/Michelle tracking)",
                         "Scale model: confirm CPA → reinvest revenue → scale to $3–5K/month → prove → $300K/month vision",
                         "Creative: use best-performing existing ads as baseline, test construction compliance hooks",
-                        "Explore Google payment terms via Ari's contacts to ease cash flow constraints on ad spend"
+                        "Explore Google payment terms via Ari\u0027s contacts to ease cash flow constraints on ad spend"
                     ],
         "x":  700,
-        "y":  1060
+        "y":  1060,
+        "presentationStep":  3
     },
     {
         "id":  23,
+        "isLive":  true,
         "hotspotLabel":  "Google Ads",
         "name":  "Google Ads — Generic Campaign",
         "phase":  "awareness",
@@ -454,6 +474,7 @@
                         "Jerry metric: $3K/day annualised revenue = 10.45 new PRO subs/day at $287/year"
                     ],
         "x":  820,
-        "y":  1060
+        "y":  1060,
+        "presentationStep":  3
     }
 ]
