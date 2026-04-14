@@ -80,6 +80,19 @@ export default function Hotspot({ tactic, isVisible, isSelected, onClick, isLock
         </>
       )}
 
+      {/* AI brain badge — shown for tactics with isAI=true */}
+      {isAI && !isLocked && !isDeferred && !isLowPriority && (
+        <>
+          <rect x={tactic.x + 5} y={tactic.y - 22} width={18} height={9} rx={4.5}
+            fill="#8B5CF6" fillOpacity={0.18} stroke="#8B5CF6" strokeWidth={0.7} strokeOpacity={0.75}
+            style={{ pointerEvents: 'none' }} />
+          <text x={tactic.x + 14} y={tactic.y - 15.5} textAnchor="middle"
+            fill="#8B5CF6" fillOpacity={0.95} fontSize={4.5}
+            fontFamily="'Inter', sans-serif" fontWeight={800} letterSpacing="0.05em"
+            style={{ pointerEvents: 'none' }}>AI</text>
+        </>
+      )}
+
       {isLive && !isLocked && !isGenericFaded && (
         <>
           <rect x={tactic.x - 13} y={tactic.y - 22} width={26} height={9} rx={4.5}

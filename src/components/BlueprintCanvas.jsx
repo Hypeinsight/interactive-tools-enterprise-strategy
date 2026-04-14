@@ -560,21 +560,21 @@ function Staircase() {
 function TitleBlock() {
   return (
     <g>
-      <rect x={660} y={1230} width={300} height={55} rx={2}
+      <rect x={660} y={1450} width={300} height={55} rx={2}
         fill="rgba(20,130,255,0.02)" stroke="rgba(20,130,255,0.12)" strokeWidth={0.5} />
-      <line x1={660} y1={1248} x2={960} y2={1248}
+      <line x1={660} y1={1468} x2={960} y2={1468}
         stroke="rgba(20,130,255,0.08)" strokeWidth={0.5} />
-      <text x={670} y={1244} fill="rgba(20,130,255,0.3)" fontSize={7}
+      <text x={670} y={1464} fill="rgba(20,130,255,0.3)" fontSize={7}
         fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.08em">
         TOOLS™ — ENTERPRISE BUILDER PLAN
       </text>
-      <text x={670} y={1258} fill="rgba(20,130,255,0.2)" fontSize={6}
+      <text x={670} y={1478} fill="rgba(20,130,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
-        ELEVATION VIEW · SCALE: NTS · REV: 2.2 · DATE: 2026
+        ELEVATION VIEW · SCALE: NTS · REV: 3.0 · DATE: 2026
       </text>
-      <text x={670} y={1270} fill="rgba(20,130,255,0.2)" fontSize={6}
+      <text x={670} y={1490} fill="rgba(20,130,255,0.2)" fontSize={6}
         fontFamily="'Inter',sans-serif" fontWeight={500}>
-        SHEET: 1 OF 1 · 23 TACTICS · 2 CAMPAIGNS · 3 PHASES
+        SHEET: 1 OF 1 · 30 TACTICS · 2 CAMPAIGNS · 3 PHASES
       </text>
     </g>
   )
@@ -583,7 +583,7 @@ function TitleBlock() {
 // ── Compass ──
 function Compass() {
   return (
-    <g transform={`translate(60, 1255)`}>
+    <g transform={`translate(60, 1460)`}>
       <circle cx={0} cy={0} r={14} fill="none" stroke="rgba(20,130,255,0.1)" strokeWidth={0.5} />
       <line x1={0} y1={-12} x2={0} y2={12} stroke="rgba(20,130,255,0.12)" strokeWidth={0.5} />
       <line x1={-12} y1={0} x2={12} y2={0} stroke="rgba(20,130,255,0.12)" strokeWidth={0.5} />
@@ -612,9 +612,7 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <rect x={25} y={25} width={SVG_WIDTH - 50} height={SVG_HEIGHT - 50} rx={2}
         fill="none" stroke="rgba(20,130,255,0.08)" strokeWidth={0.5} />
 
-      {/* Strategy overview panels — above the building */}
-      <CJComparisonPanel />
-      <GenericCampaignDashboard />
+      {/* GenericCampaignDashboard removed — stats shown in tactic detail panels */}
 
       {/* Building blueprint — shifted down to make room for overview panels */}
       <g transform="translate(0, 210)">
@@ -626,13 +624,15 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <Foundation />
       <Elevator />
       <Staircase />
-      {/* Generic campaign zone — right side of awareness floor */}
-      <rect x={650} y={880} width={270} height={340} fill="rgba(255,149,0,0.022)" />
-      <line x1={650} y1={880} x2={650} y2={1220}
-        stroke="#FF9500" strokeWidth={0.4} strokeOpacity={0.14} strokeDasharray="4,4" />
-      <text x={786} y={1210} textAnchor="middle"
-        fill="#FF9500" fillOpacity={0.09} fontSize={13}
-        fontFamily="'Inter',sans-serif" fontWeight={900} letterSpacing="0.12em">GENERIC</text>
+      {/* Whale branch zone — left side of awareness floor */}
+      <rect x={82} y={880} width={580} height={65} fill="rgba(229,57,53,0.03)" />
+      <text x={390} y={876} textAnchor="middle"
+        fill="#E53935" fillOpacity={0.18} fontSize={7.5}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.12em">TIER 1: WHALE BRANCH</text>
+      {/* Tier 2 zone */}
+      <text x={390} y={996} textAnchor="middle"
+        fill="#1482FF" fillOpacity={0.12} fontSize={7}
+        fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.1em">TIER 2: TARGET MARKET</text>
       <FlowPaths unlockedPhases={unlockedPhases} presentationStep={presentationStep} />
       <TitleBlock />
       <Compass />
@@ -690,7 +690,7 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
             />
           )
         })}
-        <CJLegend />
+        {/* CJLegend removed */}
       </g>
 
       {/* Kate strategy badges removed — Kate’s notes live in the detail panel popups */}
