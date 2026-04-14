@@ -80,7 +80,7 @@ export default function IntroScreen({ onBegin }) {
 
         {/* Who we target */}
         <div className="intro-who">
-          <h2>Who We Are Targeting</h2>
+          <h2>Build Our Target List</h2>
 
           <div className="intro-tiers">
             {TIERS.map(({ badge, badgeClass, def, examples, primary }) => (
@@ -94,12 +94,23 @@ export default function IntroScreen({ onBegin }) {
 
           <div className="intro-personas">
             <div className="intro-persona primary-champion">
-              <strong>Primary Champion: Quality Manager (QM)</strong>
-              <span>Tasked with stopping mistakes when things go wrong. Owns compliance across multi-site projects. Already our most engaged persona across every enterprise client we have.</span>
+              <strong>Primary Target: Quality Manager (QM)</strong>
+              <span>
+                Identify 100 QMs from the biggest enterprise builders in Australia by revenue. Know their names and titles.
+                Big organisations will have several people in Quality. QMs deal with the mess when things go wrong - they are tasked with stopping mistakes and improving quality.
+              </span>
+            </div>
+            <div className="intro-persona primary-champion" style={{ marginTop: '0.5rem' }}>
+              <strong>Named champions who have already adopted Tools</strong>
+              <span>Taylor Construction: James Drury · ICON: Tom and Lauren · Hickory: Andrew and Mark</span>
             </div>
             <div className="intro-persona">
-              <strong>Secondary stakeholders</strong>
-              <span>COO (ROI sign-off) · Construction Manager (end user) · IT Director (procurement and security) · Training Manager (CPD obligations)</span>
+              <strong>Secondary: Supporters - key to win, but not direct drivers</strong>
+              <span>Design Managers · Construction Managers · Site Managers</span>
+            </div>
+            <div className="intro-persona">
+              <strong>Secondary: C-Suite - important for final sign-off only</strong>
+              <span>C-Suite provide the final approval but typically do not drive the change. Win the QM first, then the C-Suite follows.</span>
             </div>
           </div>
         </div>
