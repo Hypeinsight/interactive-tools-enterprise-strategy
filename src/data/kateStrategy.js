@@ -58,7 +58,7 @@ export const KATE_TACTIC_OVERRIDES = {
 
 // Floor sub-label overrides when Kate mode is active
 export const KATE_FLOOR_OVERRIDES = {
-  awareness: { sub: 'CRM-First Approach · Foundation & Groundwork · 9 Tactics' },
-  engage:    { sub: 'Tier 2 Focus · Framing & Structure · 8 Tactics' },
-  convert:   { sub: 'Workspace-Only Close · Fit-out & Completion · 4 Tactics' },
+  awareness: { sub: 'Weeks 1 to 8 · CRM-First · Build Target List, Direct Outreach, Content Seeding' },
+  engage:    { sub: 'Weeks 4 to 20 · Multi-Touch · Events, Videos, LinkedIn ABM, Personalised Landing Pages' },
+  convert:   { sub: 'Weeks 12+ · Pipeline to Close · Proposals, Discovery, Contract' },
 }

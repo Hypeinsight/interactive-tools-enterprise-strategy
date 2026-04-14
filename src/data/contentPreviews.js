@@ -62,6 +62,73 @@ export const TACTIC_PREVIEWS = {
     ],
   },
 
+  // ── Whale EDMs (id 32) ──────────────────────────────────────────────
+  32: {
+    type: 'email-sequence',
+    label: 'Whale EDM Sequence: Tier 1 Account-Specific Outreach',
+    emails: [
+      {
+        step: 'Email 1',
+        timing: 'Sent 2-3 days after direct mail lands',
+        subject: '[Company] and NCC compliance across [Project Name] - worth a call?',
+        from: 'Kate A. - Tools (Sales)',
+        preview: 'Hi [First Name], I sent a package to your office earlier this week...',
+        body: `Hi [First Name],
+
+I sent a package to your office earlier this week - hope it arrived safely.
+
+I wanted to follow up directly. We work with a number of Australia's top commercial builders to help their quality and compliance teams manage NCC requirements across active sites. Given [Company]'s portfolio and the scale of projects like [Project Name], I thought it would be worth a conversation.
+
+We are already working with the quality teams at Hickory, Richard Crookes and Hutchinson Builders. The feedback has been consistent - faster compliance query resolution, less back-and-forth between site and the QM, and a clear audit trail when things need to be reviewed.
+
+Worth 15 minutes to see if it is relevant for your team?
+
+Kate Aston
+Sales - Tools
+kate@buildingtools.co`,
+      },
+      {
+        step: 'Email 2',
+        timing: '4 days after Email 1 - include personalised video link',
+        subject: 'Quick video I recorded for [Company] - 60 seconds',
+        from: 'Kate A. - Tools (Sales)',
+        preview: 'Recorded a quick walkthrough showing [Company] specifically...',
+        body: `Hi [First Name],
+
+Following up from my previous note.
+
+I recorded a short 60-second walkthrough showing how [Company]'s quality team could use Tools on a project like [Project Name]. I pulled in some NCC sections that would typically come up in a commercial build of that type.
+
+[Vidyard / Loom video link]
+
+The same approach helped Hickory reduce the time their QMs spend on compliance queries by a significant amount - their team now resolves most questions directly on site without escalating to head office.
+
+Happy to jump on a call and walk through it live. I can keep it to 15 minutes.
+
+Kate`,
+      },
+      {
+        step: 'Email 3',
+        timing: '7 days after Email 2 - professional close',
+        subject: 'Last note from me, [First Name]',
+        from: 'Kate A. - Tools (Sales)',
+        preview: 'Last one from me on this...',
+        body: `Hi [First Name],
+
+I have reached out a couple of times and do not want to be a nuisance.
+
+If the timing is not right for [Company] right now, completely fine. I will leave it there.
+
+If a compliance challenge comes up and you want to see what we do, you are always welcome to reach out directly: kate@buildingtools.co
+
+Wishing [Company] all the best with upcoming projects.
+
+Kate Aston
+Tools`,
+      },
+    ],
+  },
+
   // ── Whale LinkedIn Playbook (id 29) ──────────────────────────────────────
   29: {
     type: 'document-list',
