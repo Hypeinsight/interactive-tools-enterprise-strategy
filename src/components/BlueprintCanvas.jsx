@@ -612,7 +612,9 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <rect x={25} y={25} width={SVG_WIDTH - 50} height={SVG_HEIGHT - 50} rx={2}
         fill="none" stroke="rgba(20,130,255,0.08)" strokeWidth={0.5} />
 
-      {/* GenericCampaignDashboard removed — stats shown in tactic detail panels */}
+      {/* Strategy overview panels — visible when scrolling above the building */}
+      <CJComparisonPanel />
+      <GenericCampaignDashboard />
 
       {/* Building blueprint — shifted down to make room for overview panels */}
       <g transform="translate(0, 210)">

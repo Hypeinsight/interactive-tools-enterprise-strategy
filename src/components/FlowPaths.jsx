@@ -15,7 +15,7 @@ const H = {
   // WHALE LEFT (y=940 - lowered to clear header)
   25:{x:100,y:940}, 26:{x:215,y:940}, 27:{x:330,y:940},
   // Engage - WHALE LEFT (y=650)
-  28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650}, 31:{x:550,y:650},
+  28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650}, 31:{x:460,y:650},
   // Engage - TIER 2 RIGHT (y=715)
   11:{x:530,y:715}, 14:{x:640,y:715}, 12:{x:750,y:715}, 13:{x:840,y:715},
   // Sales (y=545)
@@ -130,8 +130,8 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         <>
           {/* Tier 2: awareness -> Tier 2 engage (RIGHT) */}
           <Animated id="t2-b1"   from={9}  to={11} color={B} pc={L} opacity={0.14} />
-          <Animated id="t2-b2"   from={9}  to={14} color={B} pc={L} opacity={0.12} />
-          <Animated id="t2-c1"   from={6}  to={14} color={B} pc={L} opacity={0.11} />
+          <Animated id="t2-b2"   from={9}  to={14} color={B} pc={L} opacity={0.16} />
+          <Animated id="t2-c1"   from={6}  to={14} color={B} pc={L} opacity={0.15} />
           <Animated id="t2-li-e" from={7}  to={11} color={B} pc={L} opacity={0.11} />
           <Gateway x={700} y={860} label="QUALIFY" sub="MQL to SQL" color={B} />
 
@@ -157,14 +157,16 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
       {/* ENGAGE WITHIN-PHASE */}
       {ph2 ? (
         <>
-          {/* Whale engage (LEFT): Videos + ABM -> Landing Pages; Events -> Sales directly */}
-          <Animated id="w-vid-lp"  from={28} to={15} color={W} pc={W} opacity={0.14} />
-          <Animated id="w-play-lp" from={29} to={15} color={W} pc={W} opacity={0.12} />
+          {/* Whale engage (LEFT): Videos + ABM -> Landing Pages + Whale Events; Events -> Sales directly */}
+          <Animated id="w-vid-lp"   from={28} to={15} color={W} pc={W} opacity={0.14} />
+          <Animated id="w-play-lp"  from={29} to={15} color={W} pc={W} opacity={0.12} />
+          <Animated id="w-vid-evt"  from={28} to={31} color={W} pc={W} opacity={0.12} />
+          <Animated id="w-play-evt" from={29} to={31} color={W} pc={W} opacity={0.11} />
           <Solid from={15} to={17} color={W} opacity={0.13} />
           <Solid from={31} to={17} color={W} opacity={0.13} />
           {/* Tier 2 engage (RIGHT): Video + Events -> Sales */}
-          <Solid from={11} to={17} color={L} opacity={0.09} />
-          <Solid from={14} to={17} color={L} opacity={0.09} />
+          <Solid from={11} to={17} color={L} opacity={0.11} />
+          <Solid from={14} to={17} color={L} opacity={0.11} />
           <Solid from={12} to={17} color={GR} opacity={0.2} width={0.7} />
           <Solid from={13} to={17} color={GR} opacity={0.2} width={0.7} />
           <Dashed from={16} to={17} color={L} opacity={0.09} />

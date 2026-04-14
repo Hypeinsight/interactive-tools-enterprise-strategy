@@ -186,7 +186,7 @@ export default function App() {
           <div className="header-subtitle">Enterprise Builders · 23 Tactics · 2 Campaigns · 3 Phases</div>
           </div>
         </div>
-        <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+        {/* FilterBar removed — redundant in presentation mode */}
         <div className="header-right">
           <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
             {theme === 'dark' ? '☀️' : '🌙'}

@@ -72,11 +72,14 @@ export const TACTIC_PREVIEWS = {
     ],
   },
 
-  // ── Meta Ads (id 22) ──────────────────────────────────────────────
+  // ── Meta Ads (id 22) ─────────────────────────────────────────────────────
   22: {
-    type: 'image',
-    image: '/meta-ads.png',
-    caption: 'Current Meta Ads creative running across Facebook and Instagram.',
+    type: 'image-gallery',
+    label: 'Meta Ads Creative: Facebook & Instagram',
+    images: [
+      { src: '/meta-ads.png',   caption: 'Meta Ads creative v1 - running across Facebook and Instagram.' },
+      { src: '/meta-ads-2.png', caption: 'Meta Ads creative v2 - updated Facebook and Instagram creative.' },
+    ],
   },
 
   // ── Google Ads (id 23) ────────────────────────────────────────────
