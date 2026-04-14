@@ -99,7 +99,8 @@ export default function FlowPaths({ unlockedPhases = [1, 2, 3] }) {
       {/* ── GENERIC CAMPAIGN — always animated (Meta + Google are LIVE) ── */}
       <Animated id="g1" from={22} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
       <Animated id="g2" from={23} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
-      <Label x={620} y={1020} text="GENERIC CAMPAIGN • LIVE" color={G} />
+      {/* Label centred above Meta Ads (700) and Google Ads (820) midpoint = 760 */}
+      <Label x={762} y={1020} text="GENERIC CAMPAIGN • LIVE" color={G} />
 
       {/* ── AWARENESS → ENGAGE cross-phase ── */}
       {ph2 ? (
