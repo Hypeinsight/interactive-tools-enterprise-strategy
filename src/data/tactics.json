@@ -149,7 +149,7 @@
     },
     {
         "id":  7,
-        "hotspotLabel":  "LinkedIn Ads",
+        "hotspotLabel":  "LinkedIn Ads \u0026 Google",
         "name":  "Enterprise LinkedIn Ads \u0026 Google Conquesting",
         "phase":  "awareness",
         "phaseLabel":  "Phase 1: Awareness",
@@ -235,21 +235,19 @@
     {
         "id":  14,
         "hotspotLabel":  "Events \u0026 Roundtables",
-        "name":  "VIP Experiences \u0026 FCON-Tech Strategy",
+        "name":  "Events and Roundtables - Tier 2",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
         "campaignType":  "enterprise",
         "execPhase":  2,
-        "description":  "Orchestrating targeted micro-events and VIP experiences around major industry gatherings. Face-to-face trust is paramount in enterprise construction — events condense the sales cycle by creating high-touch interactions.",
-        "targetAudience":  "Tier 1 Executives, Industry Leaders",
+        "description":  "Targeted events and roundtables for Tier 2 commercial builders. Not conference booths - intimate formats designed to create face-to-face trust and compress the sales cycle with qualified Tier 2 prospects.",
+        "targetAudience":  "Tier 2 Commercial Builders and Industry Leaders",
         "details":  [
-                        "Tier 1 VIP Dinners: Intimate, invite-only (8-12 people), CEO-hosted, peer networking focus",
-                        "Digital CPD Summit: Short 45-min sessions (3 presenters), educational format with sales undertone — low cost, perfect for C-Suite and middle management",
-                        "Exclusive virtual roundtables hosted by Jerry Tyrrell on NCC compliance and quality management",
-                        "FCON-Tech 2026 (Sydney, Oct): Pre-event outreach 2 weeks prior, orchestrate 1:1 coffee meetings",
-                        "During FCON-Tech: Deploy executives, host private breakfast roundtable near venue",
-                        "Post-event: Follow up within 24 hours with conversation-specific messaging",
-                        "Cost lens: no booths — identify target attendees in advance and orchestrate in-person touchpoints"
+                        "Roundtable lunches: 10-20 people, private room, peer networking focus - no booths or large formats",
+                        "Trial event in Melbourne first, then Sydney - curated invite list of Tier 2 commercial builders",
+                        "Digital CPD Summit: short 45-minute sessions, educational format with soft sales undertone",
+                        "FCON-Tech 2026 (Sydney, Oct): pre-event outreach 2 weeks prior, orchestrate 1:1 coffee meetings",
+                        "Post-event: follow up within 24 hours with conversation-specific messaging from the sales team"
                     ],
         "x":  840,
         "y":  715,
@@ -317,7 +315,7 @@
         "exampleLabel":  "View Example: Hickory ABM Landing Page",
         "x":  410,
         "y":  650,
-        "presentationStep":  5,
+        "presentationStep":  4,
         "whale":  true
     },
     {
@@ -536,7 +534,7 @@
                         "Budget ring-fenced for Tier 1 only - not blended with generic campaign spend"
                     ],
         "x":  100,
-        "y":  905,
+        "y":  940,
         "presentationStep":  3
     },
     {
@@ -558,7 +556,7 @@
                         "Followed immediately by a phone call - the mail gives the sales team a reason to call"
                     ],
         "x":  215,
-        "y":  905,
+        "y":  940,
         "presentationStep":  3
     },
     {
@@ -580,7 +578,7 @@
                         "Each piece positions Tools as essential compliance infrastructure, not optional software"
                     ],
         "x":  330,
-        "y":  905,
+        "y":  940,
         "presentationStep":  3
     },
     {
@@ -648,5 +646,27 @@
                     ],
         "x":  540,
         "y":  1140
+    },
+    {
+        "id":  31,
+        "hotspotLabel":  "Whale Events",
+        "name":  "Tier 1 Whale VIP Event Strategy",
+        "phase":  "engage",
+        "phaseLabel":  "Phase 2: Engage",
+        "campaignType":  "enterprise",
+        "execPhase":  1,
+        "whale":  true,
+        "presentationStep":  4,
+        "description":  "Exclusive, intimate VIP experiences designed specifically for Tier 1 whale accounts. Curated roundtable lunches and private dinners engineered so that target executives see their exact industry peers at the table - making the conversation about adoption, not evaluation.",
+        "targetAudience":  "C-Suite and Quality Managers at Tier 1 (Whale) Accounts",
+        "details":  [
+                        "Intimate roundtable lunches: 10-15 people maximum, invite-only, peer-curated attendee list",
+                        "VIP dinners hosted by Jerry Tyrrell and Siva Gounder - relationship-first, no hard sell at the event",
+                        "Invite list engineered: known Tier 1 whale contacts plus peer accounts to create FOMO and social proof",
+                        "Location: premium venues in Sydney and Melbourne near Lendlease, CIMIC and Multiplex headquarters",
+                        "When a Tier 1 QM sees their peers at the table, the conversation shifts from \u0027should we try it\u0027 to \u0027when do we start\u0027"
+                    ],
+        "x":  550,
+        "y":  650
     }
 ]

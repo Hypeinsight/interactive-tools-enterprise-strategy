@@ -624,11 +624,11 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <Foundation />
       <Elevator />
       <Staircase />
-      {/* Whale branch zone — LEFT side */}
-      <rect x={82} y={880} width={300} height={140} rx={4}
+      {/* Whale branch zone — LEFT side (starts below floor header strip at y=908) */}
+      <rect x={82} y={916} width={300} height={110} rx={4}
         fill="rgba(229,57,53,0.025)" stroke="#E53935" strokeWidth={0.4} strokeOpacity={0.12} strokeDasharray="6,4" />
-      <text x={232} y={876} textAnchor="middle"
-        fill="#E53935" fillOpacity={0.35} fontSize={7}
+      <text x={232} y={912} textAnchor="middle"
+        fill="#E53935" fillOpacity={0.38} fontSize={7}
         fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.1em">TIER 1 WHALE</text>
       {/* Tier 2 branch zone — RIGHT side */}
       <rect x={460} y={960} width={460} height={105} rx={4}
