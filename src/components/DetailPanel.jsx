@@ -1,5 +1,73 @@
 import React, { useState, useEffect } from 'react'
 import { KATE_TACTIC_OVERRIDES } from '../data/kateStrategy'
+import { TACTIC_PREVIEWS } from '../data/contentPreviews'
+
+function EmailSequencePreview({ preview }) {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const email = preview.emails[activeIdx]
+
+  return (
+    <div className="email-preview-block">
+      <div className="detail-section-title" style={{ marginTop: '1.25rem' }}>
+        {preview.label}
+      </div>
+
+      {/* Step tabs */}
+      <div className="email-tabs">
+        {preview.emails.map((e, i) => (
+          <button
+            key={i}
+            className={`email-tab${i === activeIdx ? ' active' : ''}`}
+            onClick={() => setActiveIdx(i)}
+          >
+            {e.step}
+          </button>
+        ))}
+      </div>
+
+      {/* Timing badge */}
+      <div className="email-timing">{email.timing}</div>
+
+      {/* Mock email card */}
+      <div className="email-card">
+        <div className="email-card-header">
+          <div className="email-field">
+            <span className="email-field-label">From</span>
+            <span className="email-field-value">{email.from}</span>
+          </div>
+          <div className="email-field">
+            <span className="email-field-label">Subject</span>
+            <span className="email-field-value email-subject">{email.subject}</span>
+          </div>
+        </div>
+        <div className="email-card-body">
+          <pre className="email-body-text">{email.body}</pre>
+        </div>
+      </div>
+
+      {/* Prev / Next */}
+      <div className="email-nav">
+        <button
+          className="email-nav-btn"
+          onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
+          disabled={activeIdx === 0}
+        >
+          Previous
+        </button>
+        <span className="email-nav-count">
+          {activeIdx + 1} of {preview.emails.length}
+        </span>
+        <button
+          className="email-nav-btn"
+          onClick={() => setActiveIdx(i => Math.min(preview.emails.length - 1, i + 1))}
+          disabled={activeIdx === preview.emails.length - 1}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
   const isOpen = tactic !== null
@@ -199,6 +267,43 @@ export default function DetailPanel({ tactic, onClose, onUpdate, kateMode }) {
                   ))}
                 </ul>
               )}
+
+              {/* Rich Preview: ad image or email sequence */}
+              {(() => {
+                const preview = TACTIC_PREVIEWS[tactic.id]
+                if (!preview || editing) return null
+
+                if (preview.type === 'image') {
+                  return (
+                    <div className="preview-image-block">
+                      <div className="detail-section-title" style={{ marginTop: '1.25rem' }}>Ad Creative</div>
+                      <a
+                        href={preview.image}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="preview-image-link"
+                        title="Click to view full size"
+                      >
+                        <img
+                          src={preview.image}
+                          alt={preview.caption}
+                          className="preview-ad-image"
+                        />
+                        <span className="preview-image-hint">View full size ↗</span>
+                      </a>
+                      {preview.caption && (
+                        <p className="preview-caption">{preview.caption}</p>
+                      )}
+                    </div>
+                  )
+                }
+
+                if (preview.type === 'email-sequence') {
+                  return <EmailSequencePreview preview={preview} />
+                }
+
+                return null
+              })()}
 
               {/* URL / Link */}
               {editing ? (

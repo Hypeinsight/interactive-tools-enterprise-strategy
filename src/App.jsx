@@ -74,10 +74,11 @@ export default function App() {
   const goToTop = useCallback((ref) => {
     const r = ref ?? transformRef.current
     if (!r) return
-    const wrapperWidth = r.instance?.wrapperComponent?.clientWidth ?? window.innerWidth
-    const posX = Math.max(0, (wrapperWidth - 1000 * 1.4) / 2)
-    // Start at Awareness (Ground Floor) — SVG y=1090 maps to screen top at scale 1.4
-    r.setTransform(posX, -1350, 1.4, 0)
+    // Always use window.innerWidth for consistent centering regardless of call source
+    const scale = 1.4
+    const posX = Math.max(0, (window.innerWidth - 1000 * scale) / 2)
+    // Show Awareness (Ground Floor) at top of viewport
+    r.setTransform(posX, -1350, scale, 300)
   }, [])
 
   // ‘Restart’ goes back to the ICP intro; TransformWrapper onInit handles re-centering when it remounts
