@@ -673,12 +673,12 @@
         "id":  32,
         "hotspotLabel":  "Whale EDMs",
         "name":  "Whale EDM Outreach Sequence",
-        "phase":  "awareness",
-        "phaseLabel":  "Phase 1: Awareness",
+        "phase":  "engage",
+        "phaseLabel":  "Phase 2: Engage",
         "campaignType":  "enterprise",
         "execPhase":  1,
         "whale":  true,
-        "presentationStep":  3,
+        "presentationStep":  4,
         "description":  "A personalised, account-specific email sequence deployed to Tier 1 whale targets. Unlike the generic EDM broadcast, each whale EDM references the target firm by name, mentions their active projects, and uses named peers (Hutchinson, Hickory, Richard Crookes) as proof. The sequence is designed to get a reply, not just an open.",
         "targetAudience":  "Quality Managers and C-Suite at Tier 1 (Whale) Accounts",
         "details":  [
@@ -688,7 +688,7 @@
                         "Email 3: professional close - polite, leaves the door open without being pushy",
                         "Triggered after the direct mail lands - mail gives sales a warm reason to follow up digitally"
                     ],
-        "x":  440,
-        "y":  940
+        "x":  330,
+        "y":  760
     }
 ]

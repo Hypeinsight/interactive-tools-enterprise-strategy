@@ -13,7 +13,8 @@ const H = {
   // TIER 2 RIGHT (y=1000)
   9:{x:510,y:1000}, 6:{x:620,y:1000}, 7:{x:730,y:1000}, 8:{x:840,y:1000},
   // WHALE LEFT (y=940 - lowered to clear header)
-  25:{x:100,y:940}, 26:{x:215,y:940}, 27:{x:330,y:940}, 32:{x:440,y:940},
+  25:{x:100,y:940}, 26:{x:215,y:940}, 27:{x:330,y:940},
+  32:{x:330,y:760}, // Whale EDMs - in engage, bridges Whale Content (awareness) to Whale Videos
   // Engage - WHALE LEFT (y=650)
   28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650},
   31:{x:460,y:690},  // Whale Events - below Landing Pages
@@ -117,7 +118,6 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         <Animated id="w25" from={10} to={25} color={W} pc={W} opacity={0.18} width={1.1} />
         <Animated id="w26" from={10} to={26} color={W} pc={W} opacity={0.18} width={1.1} />
         <Animated id="w27" from={10} to={27} color={W} pc={W} opacity={0.16} width={1.1} />
-        <Animated id="w32" from={10} to={32} color={W} pc={W} opacity={0.16} width={1.1} />
       </>}
 
       {/* EDM Outreach -> LinkedIn Strategy + Multi-Threaded Email in Engage (greyed, external path) */}
@@ -143,9 +143,8 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
           <Animated id="w-cont-play" from={27} to={29} color={W} pc={W} opacity={0.14} />
           <Animated id="w-li-vid"    from={25} to={28} color={W} pc={W} opacity={0.14} />
           <Animated id="w-li-play"   from={25} to={29} color={W} pc={W} opacity={0.14} />
-          {/* Whale EDMs also connects to whale engage */}
-          <Animated id="w-edm-vid"   from={32} to={28} color={W} pc={W} opacity={0.14} />
-          <Animated id="w-edm-play"  from={32} to={29} color={W} pc={W} opacity={0.13} />
+          {/* Whale Content (awareness) -> Whale EDMs (engage bridge) -> Videos + ABM */}
+          <Animated id="w-cont-edm"  from={27} to={32} color={W} pc={W} opacity={0.18} width={1.1} />
           {/* Lumpy Mail and Content also connect to Whale Events */}
           <Animated id="w-lump-evt"  from={26} to={31} color={W} pc={W} opacity={0.12} />
           <Animated id="w-cont-evt"  from={27} to={31} color={W} pc={W} opacity={0.12} />
@@ -153,7 +152,7 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
         </>
       ) : (
         <>
-          {[{f:9,t:11},{f:9,t:14},{f:6,t:14},{f:7,t:11},{f:7,t:14},{f:26,t:28},{f:27,t:28},{f:27,t:29},{f:25,t:28},{f:25,t:29},{f:26,t:31},{f:27,t:31},{f:32,t:28},{f:32,t:29}].map(({f,t},i) =>
+          {[{f:9,t:11},{f:9,t:14},{f:6,t:14},{f:7,t:11},{f:7,t:14},{f:26,t:28},{f:27,t:28},{f:27,t:29},{f:25,t:28},{f:25,t:29},{f:26,t:31},{f:27,t:31},{f:27,t:32},{f:32,t:28},{f:32,t:29}].map(({f,t},i) =>
             H[f] && H[t] ? <Solid key={i} from={f} to={t} color={GR} opacity={0.35} width={0.8} /> : null
           )}
         </>
@@ -162,7 +161,9 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
       {/* ENGAGE WITHIN-PHASE */}
       {ph2 ? (
         <>
-          {/* Whale engage (LEFT): Videos + ABM -> Landing Pages + Whale Events; Events -> Sales directly */}
+          {/* Whale engage (LEFT): EDMs -> Videos + ABM; then Videos + ABM -> Landing Pages + Events */}
+          <Animated id="w-edm-vid"  from={32} to={28} color={W} pc={W} opacity={0.16} />
+          <Animated id="w-edm-play" from={32} to={29} color={W} pc={W} opacity={0.14} />
           <Animated id="w-vid-lp"   from={28} to={15} color={W} pc={W} opacity={0.14} />
           <Animated id="w-play-lp"  from={29} to={15} color={W} pc={W} opacity={0.12} />
           <Animated id="w-vid-evt"  from={28} to={31} color={W} pc={W} opacity={0.12} />
