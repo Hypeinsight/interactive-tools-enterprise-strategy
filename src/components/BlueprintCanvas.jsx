@@ -365,11 +365,20 @@ function UnlockPhaseButton({ x, y, phaseNum, color, onClick }) {
 }
 
 // ── Single Floor ──
-function Floor({ id, floor, kateSub, isLocked, onStartHere }) {
+function Floor({ id, floor, kateSub, isLocked, onStartHere, floorTimeline, onSaveTimeline }) {
+  const [editingTimeline, setEditingTimeline] = useState(false)
+  const [draft, setDraft] = useState('')
   const { y, h, label, phase, sub, color } = floor
-  const displaySub = kateSub || sub
+  // floorTimeline overrides kateSub overrides default sub
+  const displaySub = floorTimeline || kateSub || sub
   const c = isLocked ? 'rgba(130,140,160,0.55)' : color
   const cOp = (base) => isLocked ? base * 0.4 : base
+
+  const startEdit = () => { setDraft(displaySub); setEditingTimeline(true) }
+  const saveEdit = (val) => {
+    if (onSaveTimeline) onSaveTimeline(id, val.trim() || displaySub)
+    setEditingTimeline(false)
+  }
 
   return (
     <g>
@@ -397,11 +406,26 @@ function Floor({ id, floor, kateSub, isLocked, onStartHere }) {
         className="floor-label">
         {label} — {phase.toUpperCase()}
       </text>
-      <text x={BLDG_LEFT + 22} y={y + 23} fill={c} fillOpacity={cOp(kateSub ? 0.55 : 0.35)}
-        fontSize={7} fontFamily="'Inter',sans-serif" fontWeight={500}
-        className="floor-sublabel">
-        {displaySub}
-      </text>
+      {editingTimeline ? (
+        <foreignObject x={BLDG_LEFT + 8} y={y + 14} width={BLDG_W - 16} height={18}>
+          <input
+            style={{ width:'100%', fontSize:'11px', fontFamily:'Inter,sans-serif', border:'1.5px solid #1482FF', borderRadius:'4px', padding:'1px 6px', background:'#fff', color:'#1a2744', outline:'none' }}
+            value={draft}
+            onChange={e => setDraft(e.target.value)}
+            onBlur={() => saveEdit(draft)}
+            onKeyDown={e => { if (e.key === 'Enter') saveEdit(draft); if (e.key === 'Escape') setEditingTimeline(false) }}
+            autoFocus
+          />
+        </foreignObject>
+      ) : (
+        <text x={BLDG_LEFT + 22} y={y + 23} fill={c} fillOpacity={cOp(kateSub ? 0.55 : 0.35)}
+          fontSize={7} fontFamily="'Inter',sans-serif" fontWeight={500}
+          className="floor-sublabel"
+          onClick={onSaveTimeline ? startEdit : undefined}
+          style={{ cursor: onSaveTimeline ? 'text' : 'default', pointerEvents: onSaveTimeline ? 'auto' : 'none' }}>
+          {displaySub}
+        </text>
+      )}
 
       {/* Vertical phase label — right exterior strip (replaces centred watermark) */}
       <rect x={BLDG_RIGHT + 7} y={y + 2} width={22} height={h - 4} rx={3}
@@ -595,7 +619,7 @@ function Compass() {
 }
 
 // ═══════════════════════
-export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic, kateMode, unlockedPhases = [1, 2, 3], presentationStep = 999, onResetPhases }) {
+export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic, onSelectTactic, kateMode, unlockedPhases = [1, 2, 3], presentationStep = 999, onResetPhases, floorTimelines = {}, onUpdateFloorTimeline }) {
   const ph2Locked = !unlockedPhases.includes(2)
   const ph3Locked = !unlockedPhases.includes(3)
   return (
@@ -620,9 +644,9 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <g transform="translate(0, 210)">
       <Roof />
       <BuildingEnvelope />
-      <Floor id="convert" floor={FLOORS.convert} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.convert?.sub : null} isLocked={ph3Locked} />
-      <Floor id="engage" floor={FLOORS.engage} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.engage?.sub : null} isLocked={ph2Locked} />
-      <Floor id="awareness" floor={FLOORS.awareness} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.awareness?.sub : null} isLocked={false} />
+      <Floor id="convert"   floor={FLOORS.convert}   kateSub={kateMode ? KATE_FLOOR_OVERRIDES.convert?.sub   : null} isLocked={ph3Locked} floorTimeline={floorTimelines.convert}   onSaveTimeline={onUpdateFloorTimeline} />
+      <Floor id="engage"    floor={FLOORS.engage}    kateSub={kateMode ? KATE_FLOOR_OVERRIDES.engage?.sub    : null} isLocked={ph2Locked} floorTimeline={floorTimelines.engage}    onSaveTimeline={onUpdateFloorTimeline} />
+      <Floor id="awareness" floor={FLOORS.awareness} kateSub={kateMode ? KATE_FLOOR_OVERRIDES.awareness?.sub : null} isLocked={false}     floorTimeline={floorTimelines.awareness} onSaveTimeline={onUpdateFloorTimeline} />
       <Foundation />
       <Elevator />
       <Staircase />

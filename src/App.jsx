@@ -9,6 +9,20 @@ import baseTactics from './data/tactics.json'
 import { loadRemoteEdits, saveRemoteEdits } from './utils/remoteStorage'
 
 const STORAGE_KEY = 'tools-strategy-map-edits'
+const TIMELINE_KEY = 'tools-floor-timelines'
+
+const DEFAULT_TIMELINES = {
+  awareness: 'Whale: Wks 1-12 · Tier 2: Wks 1-8 · External Path: Wks 2-14',
+  engage:    'Whale: Wks 6-24 · Tier 2: Wks 4-14 · Overlaps with Awareness',
+  convert:   'Whale: Wks 16-40+ · Tier 2: Wks 10-20 · Starts once champion is identified',
+}
+
+function loadTimelines() {
+  try {
+    const saved = localStorage.getItem(TIMELINE_KEY)
+    return saved ? { ...DEFAULT_TIMELINES, ...JSON.parse(saved) } : DEFAULT_TIMELINES
+  } catch { return DEFAULT_TIMELINES }
+}
 
 const MAX_STEP = 9
 const STEP_LABELS = [
@@ -43,7 +57,21 @@ export default function App() {
   const [kateMode] = useState(true) // Kate’s strategy always on
   const [presentationStep, setPresentationStep] = useState(0)
   const [showIntro, setShowIntro] = useState(true)
+  const [floorTimelines, setFloorTimelines] = useState(loadTimelines)
   const transformRef = useRef(null)
+
+  const updateFloorTimeline = useCallback((floorId, text) => {
+    setFloorTimelines(prev => {
+      const next = { ...prev, [floorId]: text }
+      try {
+        localStorage.setItem(TIMELINE_KEY, JSON.stringify(next))
+        // Save to remote — merge with current tactic edits so nothing is lost
+        const tacticEdits = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+        saveRemoteEdits({ ...tacticEdits, _timelines: next })
+      } catch {}
+      return next
+    })
+  }, [])
 
   // Derive which phase floors are visible from presentation progress
   const unlockedPhases = [
@@ -52,12 +80,19 @@ export default function App() {
     ...(presentationStep >= 6 ? [3] : []),  // Convert unlocks at step 6
   ]
 
-  // Load remote edits on mount (overrides local)
+  // Load remote data on mount (overrides local) — handles both tactic edits and floor timelines
   useEffect(() => {
-    loadRemoteEdits().then(edits => {
-      if (edits && Object.keys(edits).length > 0) {
-        setTacticsData(applyEdits(edits))
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(edits))
+    loadRemoteEdits().then(data => {
+      if (!data || !Object.keys(data).length) return
+      // Separate tactic edits (numeric keys) from special keys (_timelines etc.)
+      const tacticEdits = Object.fromEntries(Object.entries(data).filter(([k]) => !k.startsWith('_')))
+      if (Object.keys(tacticEdits).length > 0) {
+        setTacticsData(applyEdits(tacticEdits))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tacticEdits))
+      }
+      if (data._timelines) {
+        setFloorTimelines(prev => ({ ...DEFAULT_TIMELINES, ...data._timelines }))
+        localStorage.setItem(TIMELINE_KEY, JSON.stringify(data._timelines))
       }
     })
   }, [])
@@ -118,8 +153,9 @@ export default function App() {
           delete saved[updatedTactic.id]
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(saved))
-        // Save to remote (async, non-blocking)
-        saveRemoteEdits(saved)
+        // Save to remote (async, non-blocking) — include timelines so they are preserved
+        const timelines = JSON.parse(localStorage.getItem(TIMELINE_KEY) || '{}')
+        saveRemoteEdits({ ...saved, _timelines: timelines })
       } catch (e) { /* ignore */ }
       return next
     })
@@ -219,6 +255,8 @@ export default function App() {
               kateMode={kateMode}
               unlockedPhases={unlockedPhases}
               presentationStep={presentationStep}
+              floorTimelines={floorTimelines}
+              onUpdateFloorTimeline={updateFloorTimeline}
             />
           </div>
         </TransformComponent>

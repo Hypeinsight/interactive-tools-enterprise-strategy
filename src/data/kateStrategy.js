@@ -58,7 +58,7 @@ export const KATE_TACTIC_OVERRIDES = {
 
 // Floor sub-label overrides when Kate mode is active
 export const KATE_FLOOR_OVERRIDES = {
-  awareness: { sub: 'Weeks 1 to 8 · CRM-First · Build Target List, Direct Outreach, Content Seeding' },
-  engage:    { sub: 'Weeks 4 to 20 · Multi-Touch · Events, Videos, LinkedIn ABM, Personalised Landing Pages' },
-  convert:   { sub: 'Weeks 12+ · Pipeline to Close · Proposals, Discovery, Contract' },
+  awareness: { sub: 'Whale: Wks 1-12 · Tier 2: Wks 1-8 · External Path: Wks 2-14 · Click to edit' },
+  engage:    { sub: 'Whale: Wks 6-24 · Tier 2: Wks 4-14 · Overlaps with Awareness · Click to edit' },
+  convert:   { sub: 'Whale: Wks 16-40+ · Tier 2: Wks 10-20 · Starts once champion is identified · Click to edit' },
 }
