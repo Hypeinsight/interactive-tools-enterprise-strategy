@@ -121,7 +121,7 @@
                         "Handwritten note from the Tools™ founder + Personalised URL (PURL)",
                         "Glossy brochures with QR codes (\"10 Enterprise Playbooks\")"
                     ],
-        "x":  150,
+        "x":  510,
         "y":  1000,
         "presentationStep":  3
     },
@@ -142,7 +142,7 @@
                         "Content syndication: whitepapers and case studies through MBA, HIA publications",
                         "Thought leadership: cost of building defects, NCC update complexities, defect liability"
                     ],
-        "x":  310,
+        "x":  620,
         "y":  1000,
         "presentationStep":  3,
         "isLive":  false
@@ -164,7 +164,7 @@
                         "LinkedIn requires a completely different strategy vs. Meta/Google — activate after generic campaign proves CPA",
                         "Scale trigger: once Generic Campaign attribution is confirmed and budget allows, shift to LinkedIn"
                     ],
-        "x":  490,
+        "x":  730,
         "y":  1000,
         "presentationStep":  3,
         "lowPriority":  false
@@ -185,7 +185,7 @@
                         "Designed for initial awareness — not the full ABM cadence",
                         "Timed to land after content warm-up phase (Week 5+)"
                     ],
-        "x":  650,
+        "x":  840,
         "y":  1000,
         "presentationStep":  3,
         "lowPriority":  true
@@ -227,7 +227,7 @@
                         "Use tools like Vidyard or Loom — video emails lift open rates 35%+",
                         "Click-through rates increase by over 150% with embedded video"
                     ],
-        "x":  310,
+        "x":  530,
         "y":  715,
         "presentationStep":  4,
         "isAI":  true
@@ -251,7 +251,7 @@
                         "Post-event: Follow up within 24 hours with conversation-specific messaging",
                         "Cost lens: no booths — identify target attendees in advance and orchestrate in-person touchpoints"
                     ],
-        "x":  450,
+        "x":  840,
         "y":  715,
         "presentationStep":  4
     },
@@ -271,7 +271,7 @@
                         "Day +1/+2/+5 post-connection with high-value assets (ROI calculator)",
                         "Layer targeting: C-Suite (ROI), Operations/HSE (compliance), IT/Procurement (security)"
                     ],
-        "x":  570,
+        "x":  650,
         "y":  715,
         "presentationStep":  4,
         "lowPriority":  true
@@ -292,7 +292,7 @@
                         "Day 7 (Value): Relevant case study — Hutchinson Builders or Richard Crookes",
                         "Day 12 (Breakup): Polite withdrawal, leaves door open"
                     ],
-        "x":  700,
+        "x":  760,
         "y":  715,
         "presentationStep":  4,
         "lowPriority":  true
@@ -315,7 +315,7 @@
                     ],
         "exampleUrl":  "https://hickoryabm-shecpq3l.manus.space/",
         "exampleLabel":  "View Example: Hickory ABM Landing Page",
-        "x":  580,
+        "x":  410,
         "y":  650,
         "presentationStep":  5,
         "whale":  true
@@ -535,7 +535,7 @@
                         "Retarget LinkedIn profile visitors and engagers from the ABM account list",
                         "Budget ring-fenced for Tier 1 only - not blended with generic campaign spend"
                     ],
-        "x":  150,
+        "x":  100,
         "y":  905,
         "presentationStep":  3
     },
@@ -557,7 +557,7 @@
                         "Personalised URL (PURL) on the brochure for tracking and attribution",
                         "Followed immediately by a phone call - the mail gives the sales team a reason to call"
                     ],
-        "x":  340,
+        "x":  215,
         "y":  905,
         "presentationStep":  3
     },
@@ -579,7 +579,7 @@
                         "Content written specifically for commercial construction - not residential or architects",
                         "Each piece positions Tools as essential compliance infrastructure, not optional software"
                     ],
-        "x":  530,
+        "x":  330,
         "y":  905,
         "presentationStep":  3
     },
@@ -601,13 +601,13 @@
                         "References a known project win or compliance event specific to the target firm",
                         "Personalised subject line: \u0027I made this for [Company] - 60 seconds\u0027"
                     ],
-        "x":  220,
+        "x":  150,
         "y":  650,
         "presentationStep":  4
     },
     {
         "id":  29,
-        "hotspotLabel":  "Whale LinkedIn Playbook",
+        "hotspotLabel":  "Whale LinkedIn ABM",
         "name":  "Whale LinkedIn ABM Playbook",
         "phase":  "engage",
         "phaseLabel":  "Phase 2: Engage",
@@ -623,7 +623,7 @@
                         "Multi-threading: simultaneously target QM, CIO and COO at the same account",
                         "Content to share: Hickory case study, NCC update commentary and ROI calculator"
                     ],
-        "x":  400,
+        "x":  280,
         "y":  650,
         "presentationStep":  4
     },

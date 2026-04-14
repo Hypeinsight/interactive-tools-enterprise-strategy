@@ -624,15 +624,18 @@ export default function BlueprintCanvas({ tactics, activeFilter, selectedTactic,
       <Foundation />
       <Elevator />
       <Staircase />
-      {/* Whale branch zone — left side of awareness floor */}
-      <rect x={82} y={880} width={580} height={65} fill="rgba(229,57,53,0.03)" />
-      <text x={390} y={876} textAnchor="middle"
-        fill="#E53935" fillOpacity={0.18} fontSize={7.5}
-        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.12em">TIER 1: WHALE BRANCH</text>
-      {/* Tier 2 zone */}
-      <text x={390} y={996} textAnchor="middle"
-        fill="#1482FF" fillOpacity={0.12} fontSize={7}
-        fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.1em">TIER 2: TARGET MARKET</text>
+      {/* Whale branch zone — LEFT side */}
+      <rect x={82} y={880} width={300} height={140} rx={4}
+        fill="rgba(229,57,53,0.025)" stroke="#E53935" strokeWidth={0.4} strokeOpacity={0.12} strokeDasharray="6,4" />
+      <text x={232} y={876} textAnchor="middle"
+        fill="#E53935" fillOpacity={0.35} fontSize={7}
+        fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.1em">TIER 1 WHALE</text>
+      {/* Tier 2 branch zone — RIGHT side */}
+      <rect x={460} y={960} width={460} height={105} rx={4}
+        fill="rgba(20,130,255,0.02)" stroke="#1482FF" strokeWidth={0.4} strokeOpacity={0.1} strokeDasharray="6,4" />
+      <text x={690} y={956} textAnchor="middle"
+        fill="#1482FF" fillOpacity={0.3} fontSize={7}
+        fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.1em">TIER 2 TARGET MARKET</text>
       <FlowPaths unlockedPhases={unlockedPhases} presentationStep={presentationStep} />
       <TitleBlock />
       <Compass />

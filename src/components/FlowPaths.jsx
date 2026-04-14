@@ -1,24 +1,25 @@
 ﻿import React from 'react'
 
+// Whale LEFT side, Tier 2 RIGHT side, PLG at centre as split point
 const H = {
   // Awareness entry (y=1280)
   1:{x:200,y:1280}, 2:{x:420,y:1280}, 3:{x:640,y:1280},
   // Leadfeeder (y=1210)
   24:{x:420,y:1210},
-  // Pipeline row (y=1140) - includes live generic
+  // Pipeline row (y=1140)
   4:{x:200,y:1140}, 5:{x:380,y:1140},
   30:{x:540,y:1140}, 22:{x:700,y:1140}, 23:{x:840,y:1140},
-  // PLG gateway (y=1060)
+  // PLG gateway - CENTRE SPLIT POINT (y=1060)
   10:{x:400,y:1060},
-  // Tier 2 outreach (y=1000)
-  9:{x:150,y:1000}, 6:{x:310,y:1000}, 7:{x:490,y:1000}, 8:{x:650,y:1000},
-  // Whale awareness (y=905) - only 25,26,27 (28+29 now in engage)
-  25:{x:150,y:905}, 26:{x:340,y:905}, 27:{x:530,y:905},
-  // Engage - whale row (y=650)
-  28:{x:220,y:650}, 29:{x:400,y:650}, 15:{x:580,y:650},
-  // Engage - tier 2 row (y=715)
-  11:{x:310,y:715}, 12:{x:570,y:715}, 13:{x:700,y:715}, 14:{x:450,y:715},
-  // Engage - sales (y=545)
+  // === TIER 2 RIGHT (y=1000) ===
+  9:{x:510,y:1000}, 6:{x:620,y:1000}, 7:{x:730,y:1000}, 8:{x:840,y:1000},
+  // === WHALE LEFT (y=905) ===
+  25:{x:100,y:905}, 26:{x:215,y:905}, 27:{x:330,y:905},
+  // === Engage – WHALE LEFT (y=650) ===
+  28:{x:150,y:650}, 29:{x:280,y:650}, 15:{x:410,y:650},
+  // === Engage – TIER 2 RIGHT (y=715) ===
+  11:{x:530,y:715}, 14:{x:640,y:715}, 12:{x:750,y:715}, 13:{x:840,y:715},
+  // Sales convergence (y=545)
   16:{x:680,y:545}, 17:{x:420,y:545},
   // Convert
   18:{x:300,y:330}, 19:{x:300,y:180}, 20:{x:550,y:180}, 21:{x:750,y:180},
@@ -54,8 +55,8 @@ function Label({ x, y, text, color }) {
   const w = text.length * 4.2 + 16
   return (
     <g>
-      <rect x={x-w/2} y={y-8} width={w} height={16} rx={8} fill="rgba(26,31,46,0.85)" stroke={color} strokeWidth={0.5} strokeOpacity={0.25} />
-      <text x={x} y={y+4} textAnchor="middle" fill={color} fillOpacity={0.7} fontSize={6} fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.06em">{text}</text>
+      <rect x={x-w/2} y={y-8} width={w} height={16} rx={8} fill="rgba(26,31,46,0.85)" stroke={color} strokeWidth={0.5} strokeOpacity={0.3} />
+      <text x={x} y={y+4} textAnchor="middle" fill={color} fillOpacity={0.75} fontSize={6} fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.06em">{text}</text>
     </g>
   )
 }
@@ -80,91 +81,114 @@ export default function FlowPaths({ unlockedPhases=[1,2,3], presentationStep=0 }
   return (
     <g className="flow-paths">
 
-      {/* AWARENESS ENTRY */}
+      {/* AWARENESS ENTRY chain */}
       {s1 && <><Solid from={1} to={2} color={B} opacity={0.18} width={1.2} /><Solid from={2} to={3} color={B} opacity={0.18} width={1.2} /></>}
 
-      {/* LEADFEEDER */}
-      {s1 && <><Solid from={3} to={24} color={B} opacity={0.15} /><Solid from={24} to={4} color={B} opacity={0.12} /><Dashed from={24} to={5} color={B} opacity={0.08} /></>}
+      {/* LEADFEEDER: Intelligence -> Leadfeeder -> Known Contacts | External Enrichment */}
+      {s1 && <><Solid from={3} to={24} color={B} opacity={0.15} /><Solid from={24} to={4} color={B} opacity={0.12} /><Dashed from={24} to={5} color={B} opacity={0.09} /></>}
 
-      {/* PIPELINE: Known Contacts + PLG */}
-      {s2 && <><Animated id="kc-plg" from={4} to={10} color={B} pc={L} opacity={0.15} /><Dashed from={5} to={10} color={GR} opacity={0.5} /></>}
+      {/* Known Contacts -> PLG (main known path) */}
+      {s2 && <Animated id="kc-plg" from={4} to={10} color={B} pc={L} opacity={0.15} />}
 
-      {/* GENERIC CAMPAIGNS (always animated - Meta, Google, EDM are LIVE) */}
+      {/* External Enrichment -> EDM Outreach (external/harder path, grey) */}
+      {s2 && <Solid from={5} to={8} color={GR} opacity={0.55} width={0.9} />}
+
+      {/* ECOMMERCE CAMPAIGNS (always live) */}
       <Animated id="g1" from={22} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
       <Animated id="g2" from={23} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
       <Animated id="g3" from={30} to={20} color={G} pc={G} opacity={0.22} width={1.2} />
-      <Label x={762} y={1100} text="GENERIC CAMPAIGNS - LIVE" color={G} />
+      <Label x={720} y={1100} text="Ecommerce Campaign - LIVE" color={G} />
 
-      {/* TIER 2 OUTREACH: PLG -> Lumpy, Content&EDM, LinkedIn, EDM(grey) */}
+      {/* PLG SPLIT: label showing the two branches diverge here */}
+      {s3 && <>
+        <text x={200} y={1045} textAnchor="middle"
+          fill={W} fillOpacity={0.45} fontSize={6.5} fontFamily="'Inter',sans-serif" fontWeight={800} letterSpacing="0.08em" style={{pointerEvents:'none'}}>
+          WHALE ←
+        </text>
+        <text x={640} y={1045} textAnchor="middle"
+          fill={B} fillOpacity={0.35} fontSize={6.5} fontFamily="'Inter',sans-serif" fontWeight={700} letterSpacing="0.08em" style={{pointerEvents:'none'}}>
+          → TIER 2
+        </text>
+      </>}
+
+      {/* TIER 2 OUTREACH (RIGHT): PLG -> Lumpy, Content&EDM, LinkedIn, EDM(grey) */}
       {s3 && <>
         <Animated id="t2-lumpy" from={10} to={9} color={B} pc={B} opacity={0.14} />
         <Animated id="t2-cont"  from={10} to={6} color={B} pc={B} opacity={0.13} />
         <Animated id="t2-li"    from={10} to={7} color={B} pc={B} opacity={0.12} />
-        <Solid from={10} to={8} color={GR} opacity={0.4} width={0.7} />
-        <Label x={390} y={972} text="TIER 2" color={B} />
+        <Solid from={10} to={8} color={GR} opacity={0.35} width={0.7} />
       </>}
 
-      {/* WHALE BRANCH: PLG -> Whale LinkedIn, Lumpy Mail, Content */}
+      {/* WHALE OUTREACH (LEFT): PLG -> Whale LinkedIn, Lumpy Mail, Content */}
       {s3 && <>
         <Animated id="w25" from={10} to={25} color={W} pc={W} opacity={0.18} width={1.1} />
         <Animated id="w26" from={10} to={26} color={W} pc={W} opacity={0.18} width={1.1} />
         <Animated id="w27" from={10} to={27} color={W} pc={W} opacity={0.16} width={1.1} />
-        <Label x={340} y={877} text="TIER 1 WHALE" color={W} />
+      </>}
+
+      {/* EDM Outreach -> greyed engage contemporaries (External Enrichment path) */}
+      {s3 && <>
+        <Solid from={8} to={12} color={GR} opacity={0.3} width={0.7} />
+        <Solid from={8} to={13} color={GR} opacity={0.3} width={0.7} />
       </>}
 
       {/* AWARENESS -> ENGAGE */}
       {ph2 ? (
         <>
-          {/* Tier 2: Lumpy + Content&EDM + LinkedIn -> Personalised Video + Events */}
+          {/* Tier 2 awareness -> Tier 2 engage (RIGHT) */}
           <Animated id="t2-b1" from={9} to={11} color={B} pc={L} opacity={0.14} />
           <Animated id="t2-b2" from={9} to={14} color={B} pc={L} opacity={0.12} />
-          <Animated id="t2-c1" from={6} to={14} color={B} pc={L} opacity={0.12} />
-          <Animated id="t2-li-eng" from={7} to={11} color={B} pc={L} opacity={0.11} />
-          <Label x={230} y={843} text="TIER 2 ENGAGE" color={B} />
-          <Gateway x={470} y={865} label="QUALIFY" sub="MQL to SQL" color={B} />
+          <Animated id="t2-c1" from={6} to={14} color={B} pc={L} opacity={0.11} />
+          <Animated id="t2-li-e" from={7} to={11} color={B} pc={L} opacity={0.11} />
+          <Gateway x={700} y={860} label="QUALIFY" sub="MQL to SQL" color={B} />
 
-          {/* Whale: Lumpy Mail -> Whale Videos; Content -> Videos + Playbook; LinkedIn -> Playbook */}
+          {/* Whale awareness -> Whale engage (LEFT) */}
+          {/* Lumpy Mail -> Whale Videos */}
           <Animated id="w-lump-vid"  from={26} to={28} color={W} pc={W} opacity={0.16} width={1.1} />
-          <Animated id="w-cont-vid"  from={27} to={28} color={W} pc={W} opacity={0.14} width={1.0} />
-          <Animated id="w-cont-play" from={27} to={29} color={W} pc={W} opacity={0.14} width={1.0} />
-          <Animated id="w-li-play"   from={25} to={29} color={W} pc={W} opacity={0.14} width={1.0} />
-          <Label x={640} y={843} text="WHALE ENGAGE" color={W} />
+          {/* Content -> Whale Videos + LinkedIn ABM */}
+          <Animated id="w-cont-vid"  from={27} to={28} color={W} pc={W} opacity={0.14} />
+          <Animated id="w-cont-play" from={27} to={29} color={W} pc={W} opacity={0.14} />
+          {/* Whale LinkedIn -> Whale Videos + LinkedIn ABM + Landing Pages */}
+          <Animated id="w-li-vid"    from={25} to={28} color={W} pc={W} opacity={0.14} />
+          <Animated id="w-li-play"   from={25} to={29} color={W} pc={W} opacity={0.14} />
+          <Animated id="w-li-lp"     from={25} to={15} color={W} pc={W} opacity={0.12} />
+          <Gateway x={200} y={860} label="WHALE ENGAGE" sub="Tier 1 Accounts" color={W} />
         </>
       ) : (
         <>
-          <Solid from={9} to={11}  color={GR} opacity={0.4} width={0.7} />
-          <Solid from={9} to={14}  color={GR} opacity={0.4} width={0.7} />
-          <Solid from={6} to={14}  color={GR} opacity={0.3} width={0.7} />
-          <Solid from={7} to={11}  color={GR} opacity={0.3} width={0.7} />
+          <Solid from={9} to={11} color={GR} opacity={0.4} width={0.7} />
+          <Solid from={9} to={14} color={GR} opacity={0.4} width={0.7} />
+          <Solid from={6} to={14} color={GR} opacity={0.3} width={0.7} />
+          <Solid from={7} to={11} color={GR} opacity={0.3} width={0.7} />
           <Solid from={26} to={28} color={GR} opacity={0.3} width={0.7} />
           <Solid from={27} to={28} color={GR} opacity={0.3} width={0.7} />
           <Solid from={27} to={29} color={GR} opacity={0.3} width={0.7} />
-          <Solid from={25} to={29} color={GR} opacity={0.3} width={0.7} />
+          <Solid from={25} to={28} color={GR} opacity={0.25} width={0.7} />
+          <Solid from={25} to={29} color={GR} opacity={0.25} width={0.7} />
+          <Solid from={25} to={15} color={GR} opacity={0.2} width={0.7} />
         </>
       )}
 
       {/* ENGAGE WITHIN-PHASE */}
       {ph2 ? (
         <>
-          {/* Whale engage: Videos + Playbook -> Personalised Landing Pages */}
+          {/* Whale engage (LEFT): Videos + LinkedIn ABM -> Landing Pages -> Sales */}
           <Animated id="w-vid-lp"  from={28} to={15} color={W} pc={W} opacity={0.14} />
           <Animated id="w-play-lp" from={29} to={15} color={W} pc={W} opacity={0.12} />
           <Solid from={15} to={17} color={W} opacity={0.14} />
 
-          {/* Tier 2 engage: Personalised Video + Events -> Sales Discovery */}
-          {[11, 14].map(id => <Solid key={`e${id}`} from={id} to={17} color={L} opacity={0.09} />)}
-          {/* Dimmed low-priority engage */}
-          <Solid from={12} to={17} color={GR} opacity={0.25} width={0.7} />
-          <Solid from={13} to={17} color={GR} opacity={0.25} width={0.7} />
-          <Dashed from={16} to={17} color={L} />
+          {/* Tier 2 engage (RIGHT): Video + Events -> Sales */}
+          <Solid from={11} to={17} color={L} opacity={0.09} />
+          <Solid from={14} to={17} color={L} opacity={0.09} />
+          <Solid from={12} to={17} color={GR} opacity={0.22} width={0.7} />
+          <Solid from={13} to={17} color={GR} opacity={0.22} width={0.7} />
+          <Dashed from={16} to={17} color={L} opacity={0.09} />
         </>
       ) : (
-        <>
-          {[11, 12, 13, 14, 15, 28, 29, 16].map(id => {
-            if (!H[id]) return null
-            return <Solid key={`el${id}`} from={id} to={17} color={GR} opacity={0.25} width={0.7} />
-          })}
-        </>
+        [11,12,13,14,15,28,29,16].map(id => H[id]
+          ? <Solid key={`el${id}`} from={id} to={17} color={GR} opacity={0.2} width={0.7} />
+          : null
+        )
       )}
 
       {/* ENGAGE -> CONVERT */}
